@@ -1,17 +1,86 @@
 ---
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageStub from '../components/PageStub.astro';
-import { AUDIENCES } from '../data/site-map';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import LeadForm from '../components/LeadForm.astro';
 
-export function getStaticPaths() {
-  return AUDIENCES.map((a) => ({ params: { audience: a.slug }, props: { item: a } }));
+export async function getStaticPaths() {
+  const items = await getCollection('audiences');
+  return items.map((a) => ({ params: { audience: a.id }, props: { a } }));
 }
 
-const { item } = Astro.props;
+const { a } = Astro.props;
+const { Content } = await render(a);
+const services = await getCollection('services');
+const relServices = a.data.services
+  .map((s) => services.find((x) => x.id === s))
+  .filter(Boolean);
+
+const title = `${a.data.title} — рабочие и бригады в Москве | ГрузМаркет77`;
+const desc = a.data.promise;
 ---
-<BaseLayout
-  title={`${item.title} — рабочие и бригады | ГрузМаркет77`}
-  description={`${item.title}: услуги, цены, условия, кейсы. Москва и МО.`}
->
-  <PageStub title={item.title} corpus={item.corpus} />
+<BaseLayout title={title} description={desc}>
+  <div class="wrap"><Breadcrumbs items={[{ title: a.data.title }]} /></div>
+
+  <section class="aud-hero">
+    <div class="wrap">
+      <h1>{a.data.title}</h1>
+      <p class="promise">{a.data.promise}</p>
+      <div class="cta-row">
+        <a href="/zayavka/" class="btn btn-primary">Оставить заявку →</a>
+        <a href="/tseny/" class="btn btn-ghost">Посмотреть цены</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="aud-body">
+    <div class="wrap grid">
+      <article class="prose"><Content /></article>
+      <aside>
+        <LeadForm compact heading="Готовы начать?" sub="Опишите задачу — ответим за 15 минут." />
+      </aside>
+    </div>
+  </section>
+
+  {relServices.length > 0 && (
+    <section class="block alt">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Услуги для вас</h2>
+          <p>{relServices.length} услуг, которые закрывают типовые задачи вашего профиля.</p>
+        </div>
+        <div class="svc-grid">
+          {relServices.map((r) => r && (
+            <ServiceCard slug={r.id} title={r.data.title} price_from={r.data.price_from} answer={r.data.answer} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 </BaseLayout>
+
+<style>
+  .aud-hero { padding: 32px 0 48px; background: var(--paper-soft); }
+  .aud-hero h1 { margin-bottom: 20px; }
+  .promise { font-size: 20px; max-width: 820px; margin-bottom: 32px; color: var(--ink); line-height: 1.5; }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .aud-body { padding: 56px 0; }
+  .grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: start; }
+  .prose :global(p) { margin-bottom: 14px; line-height: 1.7; }
+  .prose :global(strong) { color: var(--ink); font-family: var(--font-heading); font-weight: 700; }
+  .prose :global(ul) { padding-left: 20px; margin-bottom: 16px; }
+  .prose :global(li) { margin-bottom: 8px; }
+
+  .block { padding: 64px 0; }
+  .block.alt { background: var(--paper-soft); }
+  .section-head { text-align: center; max-width: 720px; margin: 0 auto 36px; }
+  .section-head p { margin-top: 10px; font-size: 15px; }
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; gap: 32px; }
+    .svc-grid { grid-template-columns: 1fr; }
+  }
+</style>

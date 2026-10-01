@@ -1,0 +1,67 @@
+---
+import company from '../content/company.json';
+
+interface Props {
+  type: 'LocalBusiness' | 'Service';
+  // для Service:
+  serviceName?: string;
+  description?: string;
+  priceFrom?: string;
+  url?: string;
+}
+const { type, serviceName, description, priceFrom, url } = Astro.props;
+
+const base = {
+  '@context': 'https://schema.org'
+};
+
+let data: Record<string, unknown>;
+
+if (type === 'LocalBusiness') {
+  data = {
+    ...base,
+    '@type': 'LocalBusiness',
+    name: company.brand,
+    legalName: company.name,
+    taxID: company.inn,
+    telephone: company.phone,
+    email: company.email,
+    url: `https://${company.domain}`,
+    areaServed: { '@type': 'City', name: 'Москва' },
+    address: { '@type': 'PostalAddress', addressLocality: company.address_public, addressCountry: 'RU' },
+    openingHours: 'Mo-Su 08:00-22:00',
+    priceRange: '₽₽'
+  };
+} else {
+  // извлекаем число из "от 250 ₽/м²"
+  const priceNum = priceFrom?.match(/[\d\s]+/)?.[0]?.replace(/\s/g, '') ?? '';
+  data = {
+    ...base,
+    '@type': 'Service',
+    name: serviceName,
+    description,
+    url,
+    areaServed: { '@type': 'City', name: 'Москва' },
+    provider: {
+      '@type': 'LocalBusiness',
+      name: company.brand,
+      telephone: company.phone,
+      url: `https://${company.domain}`
+    },
+    ...(priceNum
+      ? {
+          offers: {
+            '@type': 'Offer',
+            priceSpecification: {
+              '@type': 'PriceSpecification',
+              price: priceNum,
+              priceCurrency: 'RUB',
+              description: priceFrom
+            }
+          }
+        }
+      : {})
+  };
+}
+---
+<script type="application/ld+json" set:html={JSON.stringify(data)} />

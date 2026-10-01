@@ -1,10 +1,60 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageStub from '../components/PageStub.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import company from '../content/company.json';
 ---
 <BaseLayout
   title="Политика конфиденциальности | ГрузМаркет77"
-  description="Политика обработки персональных данных."
+  description="Политика обработки персональных данных на сайте gruzmarket77.ru. Какие данные собираем, зачем, как храним."
 >
-  <PageStub title="Политика конфиденциальности" corpus="—" />
+  <div class="wrap"><Breadcrumbs items={[{ title: 'Политика конфиденциальности' }]} /></div>
+
+  <section class="legal">
+    <div class="wrap">
+      <h1>Политика обработки персональных данных</h1>
+
+      <h2>1. Общие положения</h2>
+      <p>Настоящая Политика определяет порядок обработки персональных данных пользователей сайта <strong>{company.domain}</strong> (далее — Сайт), оператор — <strong>{company.name}</strong>, ИНН {company.inn}.</p>
+
+      <h2>2. Какие данные мы собираем</h2>
+      <ul>
+        <li>Данные, которые пользователь вводит в форме заявки: имя, телефон, описание задачи, выбор срока.</li>
+        <li>Технические данные: IP-адрес, cookies, страница с которой пришёл пользователь, UTM-метки.</li>
+      </ul>
+
+      <h2>3. Зачем мы собираем данные</h2>
+      <ul>
+        <li>Связаться с пользователем по его заявке и выполнить работы.</li>
+        <li>Вести учёт обращений и источников трафика.</li>
+        <li>Улучшать работу Сайта и услуги.</li>
+      </ul>
+
+      <h2>4. Как мы храним и передаём данные</h2>
+      <p>Данные хранятся в защищённых базах у операторов, обеспечивающих безопасность согласно 152-ФЗ. Передача третьим лицам — только по требованию закона или с согласия пользователя.</p>
+
+      <h2>5. Права пользователя</h2>
+      <p>Пользователь может запросить удаление или изменение своих персональных данных, направив письмо на <a href={`mailto:${company.email}`}>{company.email}</a>.</p>
+
+      <h2>6. Контакты оператора</h2>
+      <p>
+        {company.name}<br/>
+        ИНН: {company.inn}<br/>
+        ОГРНИП: {company.ogrnip}<br/>
+        Email: <a href={`mailto:${company.email}`}>{company.email}</a><br/>
+        Телефон: <a href={`tel:${company.phone_tel}`}>{company.phone}</a>
+      </p>
+
+      <p class="updated">Редакция: октябрь 2026.</p>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .legal { padding: 32px 0 80px; }
+  .legal h1 { margin-bottom: 32px; }
+  .legal h2 { font-size: 22px; margin: 32px 0 14px; }
+  .legal p { margin-bottom: 12px; line-height: 1.7; }
+  .legal ul { padding-left: 20px; margin-bottom: 16px; }
+  .legal li { margin-bottom: 8px; line-height: 1.6; }
+  .updated { margin-top: 32px; color: var(--ink-muted); font-size: 14px; }
+</style>

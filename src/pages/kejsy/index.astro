@@ -1,40 +1,66 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CASES } from '../../data/site-map';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CaseCard from '../../components/CaseCard.astro';
+import LeadForm from '../../components/LeadForm.astro';
+
+const cases = await getCollection('cases');
+const gradients = [
+  'linear-gradient(135deg,#1C252B,#3A4047)',
+  'linear-gradient(135deg,#2E4057,#1C252B)',
+  'linear-gradient(135deg,#3A4047,#2E4057)',
+  'linear-gradient(135deg,#1C252B,#2E4057)',
+  'linear-gradient(135deg,#3A4047,#4B5053)'
+];
 ---
 <BaseLayout
   title="Кейсы — примеры работ с цифрами | ГрузМаркет77"
-  description="5 кейсов в масштабе реального чека: демонтаж, уборка, хелперы, санузел под ключ, абонентский клининг. Сроки, бригады, суммы."
+  description="Пять кейсов в масштабе реального чека: демонтаж, уборка, хелперы, санузел под ключ, абонентский клининг. Сроки, бригады, суммы — всё прозрачно."
 >
-  <section class="hub">
+  <div class="wrap"><Breadcrumbs items={[{ title: 'Кейсы' }]} /></div>
+
+  <section class="hub-hero">
     <div class="wrap">
       <h1>Кейсы</h1>
-      <p class="hub-note">Контент в разработке (corpus §8).</p>
-      <ul class="hub-list">
-        {CASES.map((c) => (
-          <li><a href={`/kejsy/${c.slug}/`}>{c.title}</a></li>
+      <p>Пять работ в масштабе реального чека: от разовых выездов до квартальных контрактов. Фото «до/после» добавляются по мере получения.</p>
+    </div>
+  </section>
+
+  <section class="list">
+    <div class="wrap">
+      <div class="cases-grid">
+        {cases.map((c, i) => (
+          <CaseCard
+            slug={c.id}
+            title={c.data.title}
+            tag={c.data.tag}
+            duration={c.data.duration}
+            crew={c.data.crew}
+            total={c.data.total}
+            gradient={gradients[i % gradients.length]}
+          />
         ))}
-      </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block alt">
+    <div class="wrap">
+      <LeadForm heading="Хотите такой же результат?" sub="Опишите задачу — ответим с ценой и сроком." />
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .hub { padding: 80px 0 120px; }
-  .hub h1 { margin-bottom: 12px; }
-  .hub-note { margin-bottom: 32px; color: var(--ink-muted); }
-  .hub-list { list-style: none; display: grid; gap: 12px; }
-  .hub-list a {
-    display: block;
-    padding: 16px 20px;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    color: var(--ink);
-    font-family: var(--font-heading);
-    font-weight: 700;
-    text-decoration: none;
-    transition: all .15s;
+  .hub-hero { padding: 32px 0 40px; }
+  .hub-hero h1 { margin-bottom: 14px; }
+  .hub-hero p { font-size: 17px; max-width: 820px; }
+  .list { padding: 24px 0 72px; }
+  .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .block { padding: 64px 0; }
+  .block.alt { background: var(--paper-soft); }
+  @media (max-width: 900px) {
+    .cases-grid { grid-template-columns: 1fr; }
   }
-  .hub-list a:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
 </style>

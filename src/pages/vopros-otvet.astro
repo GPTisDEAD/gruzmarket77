@@ -1,10 +1,41 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageStub from '../components/PageStub.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqList from '../components/FaqList.astro';
+import LeadForm from '../components/LeadForm.astro';
+import faq from '../content/faq.json';
 ---
 <BaseLayout
-  title="Вопрос-ответ | ГрузМаркет77"
-  description="Частые вопросы: сроки, оплата, замена, зона выезда."
+  title="Вопрос-ответ — договор, сроки, замена, оплата | ГрузМаркет77"
+  description="18 коротких ответов про бригаду на объект: сроки выезда, минимальный заказ, работа ночью, НДС, документы мастеров, субподряд, гарантия, зона выезда."
 >
-  <PageStub title="Вопрос-ответ" corpus="§11" />
+  <div class="wrap"><Breadcrumbs items={[{ title: 'Вопрос-ответ' }]} /></div>
+
+  <section class="hub-hero">
+    <div class="wrap">
+      <h1>Вопрос-ответ</h1>
+      <p>Короткие ответы на 18 частых вопросов. Если вашего нет — задайте через форму или звонок.</p>
+    </div>
+  </section>
+
+  <section class="faq-block">
+    <div class="wrap">
+      <FaqList items={faq} />
+    </div>
+  </section>
+
+  <section class="block alt">
+    <div class="wrap">
+      <LeadForm heading="Остался вопрос?" sub="Напишите в заявке — ответим вместе с ценой и сроком." />
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .hub-hero { padding: 32px 0 36px; }
+  .hub-hero h1 { margin-bottom: 14px; }
+  .hub-hero p { font-size: 17px; max-width: 820px; }
+  .faq-block { padding: 24px 0 64px; }
+  .block { padding: 64px 0; }
+  .block.alt { background: var(--paper-soft); }
+</style>

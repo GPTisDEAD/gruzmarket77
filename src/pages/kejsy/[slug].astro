@@ -1,17 +1,135 @@
 ---
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageStub from '../../components/PageStub.astro';
-import { CASES } from '../../data/site-map';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import LeadForm from '../../components/LeadForm.astro';
 
-export function getStaticPaths() {
-  return CASES.map((c) => ({ params: { slug: c.slug }, props: { item: c } }));
+export async function getStaticPaths() {
+  const items = await getCollection('cases');
+  return items.map((c) => ({ params: { slug: c.id }, props: { c } }));
 }
 
-const { item } = Astro.props;
+const { c } = Astro.props;
+const { Content } = await render(c);
+const services = await getCollection('services');
+const relServices = c.data.service_refs
+  .map((r) => services.find((x) => x.id === r))
+  .filter(Boolean);
+
+const title = `${c.data.title} — кейс | ГрузМаркет77`;
+const desc = `Кейс: ${c.data.title}. Бригада ${c.data.crew}, срок ${c.data.duration}, итог ${c.data.total}.`;
 ---
-<BaseLayout
-  title={`${item.title} — кейс | ГрузМаркет77`}
-  description={`Кейс: ${item.title}. Сроки, состав бригады, итоговая сумма.`}
->
-  <PageStub title={item.title} corpus={item.corpus} />
+<BaseLayout title={title} description={desc}>
+  <div class="wrap"><Breadcrumbs items={[{ title: 'Кейсы', href: '/kejsy/' }, { title: c.data.title }]} /></div>
+
+  <section class="case-hero">
+    <div class="wrap">
+      <span class="tag">{c.data.tag}</span>
+      <h1>{c.data.title}</h1>
+      <div class="stats">
+        {c.data.area && <div class="stat"><span>Объём</span><strong>{c.data.area}</strong></div>}
+        <div class="stat"><span>Срок</span><strong>{c.data.duration}</strong></div>
+        <div class="stat"><span>Команда</span><strong>{c.data.crew}</strong></div>
+        <div class="stat"><span>Стоимость</span><strong>{c.data.total.split('(')[0].trim()}</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-visual">
+    <div class="wrap">
+      <div class="visual-pair">
+        <div class="pane" style="background:linear-gradient(135deg,#1C252B,#3A4047)">
+          <span>ДО</span>
+        </div>
+        <div class="pane" style="background:linear-gradient(135deg,#3A4047,#F47B20)">
+          <span>ПОСЛЕ</span>
+        </div>
+      </div>
+      <p class="visual-note">Фото «до/после» добавляются по мере получения от заказчика.</p>
+    </div>
+  </section>
+
+  <section class="case-body">
+    <div class="wrap grid">
+      <article class="prose"><Content /></article>
+      <aside>
+        {relServices.length > 0 && (
+          <div class="rel">
+            <h3>Что заказывали</h3>
+            <ul>
+              {relServices.map((r) => r && <li><a href={`/uslugi/${r.id}/`}>{r.data.title}</a></li>)}
+            </ul>
+          </div>
+        )}
+        <LeadForm compact heading="Нужна похожая работа?" sub="Опишите задачу — ответим за 15 минут." />
+      </aside>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .case-hero { padding: 32px 0 40px; background: var(--paper-soft); }
+  .tag {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 16px;
+  }
+  .case-hero h1 { margin-bottom: 28px; max-width: 900px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .stat { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px 20px; }
+  .stat span { display: block; font-size: 12px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .3px; margin-bottom: 6px; }
+  .stat strong { display: block; font-family: var(--font-heading); font-weight: 800; font-size: 18px; color: var(--ink); }
+
+  .case-visual { padding: 32px 0; }
+  .visual-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pane {
+    height: 280px;
+    border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 56px;
+    letter-spacing: 2px;
+    opacity: .9;
+    position: relative;
+    overflow: hidden;
+  }
+  .pane::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,.04) 20px, rgba(255,255,255,.04) 40px);
+  }
+  .visual-note { font-size: 13px; color: var(--ink-muted); text-align: center; margin-top: 12px; }
+
+  .case-body { padding: 40px 0 72px; }
+  .grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: start; }
+  .prose :global(p) { margin-bottom: 14px; line-height: 1.7; }
+  .prose :global(strong) { color: var(--ink); font-family: var(--font-heading); font-weight: 700; }
+
+  .rel {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .rel h3 { font-size: 15px; margin-bottom: 12px; }
+  .rel ul { list-style: none; }
+  .rel li { margin-bottom: 8px; }
+
+  @media (max-width: 900px) {
+    .stats { grid-template-columns: 1fr 1fr; }
+    .visual-pair { grid-template-columns: 1fr; }
+    .pane { height: 200px; font-size: 44px; }
+    .grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>

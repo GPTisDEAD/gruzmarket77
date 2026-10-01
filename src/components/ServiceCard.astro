@@ -1,0 +1,63 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  price_from: string;
+  answer: string;
+}
+const { slug, title, price_from, answer } = Astro.props;
+const short = answer.split('.').slice(1, 3).join('.').trim();
+---
+<article class="svc">
+  <div class="svc-top">
+    <h3><a href={`/uslugi/${slug}/`}>{title}</a></h3>
+    <div class="svc-price">{price_from}</div>
+  </div>
+  <p>{short}.</p>
+  <a class="svc-more" href={`/uslugi/${slug}/`}>Подробнее →</a>
+</article>
+
+<style>
+  .svc {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    transition: all .2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .svc:hover { border-color: var(--border-strong); box-shadow: var(--shadow-md); }
+  .svc-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .svc h3 { font-size: 19px; margin: 0; }
+  .svc h3 a { color: var(--ink); text-decoration: none; }
+  .svc h3 a:hover { color: var(--accent); }
+  .svc-price {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+  }
+  .svc p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .svc-more {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+  }
+</style>

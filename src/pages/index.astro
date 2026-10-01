@@ -1,10 +1,323 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageStub from '../components/PageStub.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CaseCard from '../components/CaseCard.astro';
+import FaqList from '../components/FaqList.astro';
+import LeadForm from '../components/LeadForm.astro';
+import PriceTable from '../components/PriceTable.astro';
+import JsonLd from '../components/JsonLd.astro';
+import company from '../content/company.json';
+import pricesData from '../content/prices.json';
+import faqData from '../content/faq.json';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const cases = await getCollection('cases');
+
+// Блок 3 — шесть самых частых задач (corpus §4 блок 3)
+const topSlugs = ['demontazh', 'uborka-posle-remonta', 'gruzchiki', 'otdelochnye-raboty', 'elektrika-santekhnika', 'uborka-territoriy'];
+const topServices = topSlugs.map((s) => services.find((x) => x.id === s)).filter(Boolean);
+
+// Блок 6 — три кейса
+const topCases = ['demontazh-kvartiry-78', 'uborka-ofisa-240', 'helpery-vystavka']
+  .map((s) => cases.find((c) => c.id === s)).filter(Boolean);
+const gradients = [
+  'linear-gradient(135deg,#1C252B,#3A4047)',
+  'linear-gradient(135deg,#2E4057,#1C252B)',
+  'linear-gradient(135deg,#3A4047,#2E4057)'
+];
+
+// Блок 8 — топ-8 строк прайса
+const priceRows = pricesData.rows.slice(0, 8).map((r) => [r.service, r.positions, r.price_from]);
+
+// Блок 9 — 5 вопросов FAQ
+const faqTop = faqData.slice(0, 5);
+
+const audiences = [
+  { slug: 'dlya-prorabov', title: 'Прорабам и подрядчикам', text: 'Закрываем нехватку рук на объекте за сутки.', icon: 'tool' },
+  { slug: 'dlya-biznesa', title: 'УК, офисам, клинингу', text: 'Регулярное обслуживание и люди в субподряд.', icon: 'building' },
+  { slug: 'dlya-meropriyatiy', title: 'Ивент-агентствам', text: 'Хелперы и грузчики сменами, ночью, бригадами.', icon: 'event' },
+  { slug: 'chastnym-klientam', title: 'Частным клиентам', text: 'Ремонт, уборка после ремонта, переезд, дом.', icon: 'home' }
+];
+
+const steps = [
+  { n: '01', t: 'Заявка', d: 'Оставляете заявку — телефон, WhatsApp или форма.' },
+  { n: '02', t: 'Цена и состав', d: 'Уточняем задачу, объём, сроки. Называем цену и состав бригады.' },
+  { n: '03', t: 'Бригада на объекте', d: 'Выход в согласованный день. На объекте отвечает бригадир.' },
+  { n: '04', t: 'Приёмка и оплата', d: 'Принимаете работу — платите по факту. Договор и счёт для юрлиц.' }
+];
+
+const trust = [
+  'Проверенные мастера с документами — покажем паспорта до выхода на объект',
+  'Ответственность за срок и качество — замена мастера по первой претензии',
+  'Работаем с ИП и ООО по договору, безнал, закрывающие документы',
+  'Экстренный выезд бригады — в том числе ночью и в выходные',
+  'Говорим по-русски и по делу — прораб и бригадир понимают друг друга'
+];
 ---
 <BaseLayout
-  title="Рабочие и бригады на объект за 24–48 часов — Москва и МО | ГрузМаркет77"
-  description="Аутстаффинг рабочих, мастеров и бригад: демонтаж, отделка, клининг, грузчики, электрика. Договор, безнал, оплата по факту, замена бесплатно. Выезд 24–48 часов."
+  title="Рабочие и мастера для объектов в Москве — бригада за 24–48 часов | ГрузМаркет77"
+  description="Демонтаж, отделка, электрика, клининг, грузчики. Люди с документами на объекте за 24–48 часов. От одного человека до бригады 40. Договор с ИП, безнал, оплата по факту."
 >
-  <PageStub title="Главная — длинный лендинг, 11 блоков" corpus="§4" />
+  <JsonLd type="LocalBusiness" slot="default" />
+
+  <!-- Блок 1. Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Рабочие и мастера для объектов в Москве — <span>от одного человека до бригады 40</span></h1>
+        <p class="lead">Демонтаж, отделка, электрика, клининг, грузчики. Люди с документами на объекте за 24–48 часов. Договор с ИП, безнал, оплата по факту.</p>
+        <div class="cta-row">
+          <a href="/zayavka/" class="btn btn-primary">Оставить заявку →</a>
+          <a href={`https://wa.me/${company.whatsapp}`} class="btn btn-ghost" rel="nofollow noopener">Написать в WhatsApp</a>
+        </div>
+        <div class="trust-row">
+          <div class="trust"><span class="trust-dot"></span><div><strong>40 мастеров</strong>в базе, до 40 человек разом</div></div>
+          <div class="trust"><span class="trust-dot"></span><div><strong>24–48 часов</strong>выход бригады на объект</div></div>
+          <div class="trust"><span class="trust-dot"></span><div><strong>Москва и МО</strong>круглосуточный выезд</div></div>
+          <div class="trust"><span class="trust-dot"></span><div><strong>15+ лет</strong>в строительстве</div></div>
+        </div>
+      </div>
+      <div>
+        <LeadForm compact heading="Быстрая заявка" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Блок 2. Кому мы нужны -->
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Кому мы нужны</h2>
+        <p>Четыре типа задач — четыре формата работы. Выберите ваш.</p>
+      </div>
+      <div class="aud-grid">
+        {audiences.map((a) => (
+          <a class="aud" href={`/${a.slug}/`}>
+            <h3>{a.title}</h3>
+            <p>{a.text}</p>
+            <span class="aud-more">Подробнее →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Блок 3. Шесть самых частых задач -->
+  <section class="block alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Самые частые задачи</h2>
+        <p>Шесть услуг, которые заказывают чаще всего. <a href="/uslugi/">Все 14 услуг →</a></p>
+      </div>
+      <div class="svc-grid">
+        {topServices.map((s) => s && (
+          <ServiceCard slug={s.id} title={s.data.title} price_from={s.data.price_from} answer={s.data.answer} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Блок 4. Как это работает -->
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Как это работает</h2>
+        <p>Четыре шага от заявки до закрытых актов. <a href="/kak-my-rabotaem/">Подробнее →</a></p>
+      </div>
+      <div class="steps-grid">
+        {steps.map((s) => (
+          <div class="step">
+            <div class="step-num">{s.n}</div>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Блок 5. Кто придёт -->
+  <section class="block alt">
+    <div class="wrap who-wrap">
+      <div>
+        <h2>Кто придёт на ваш объект</h2>
+        <p class="who-text">40 мастеров: половина — постоянный костяк, половина — проверенный резерв под пиковые заказы. Документы у каждого. На объекте — бригадир, с которым решаются все вопросы. Русскоязычные и смешанные бригады — подбираем под задачу.</p>
+        <a href="/mastera/" class="btn btn-ghost">О мастерах →</a>
+      </div>
+      <ul class="who-list">
+        {trust.map((t) => (
+          <li><span class="trust-dot"></span>{t}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Блок 6. Наши работы -->
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Наши работы</h2>
+        <p>Кейсы в масштабе реального чека. <a href="/kejsy/">Все кейсы →</a></p>
+      </div>
+      <div class="cases-grid">
+        {topCases.map((c, i) => c && (
+          <CaseCard
+            slug={c.id}
+            title={c.data.title}
+            tag={c.data.tag}
+            duration={c.data.duration}
+            crew={c.data.crew}
+            total={c.data.total}
+            gradient={gradients[i]}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Блок 8. Цены -->
+  <section class="block alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Цены — стартовая сетка</h2>
+        <p>Топ-8 услуг. Полный прайс по 14 услугам — <a href="/tseny/">на странице цен</a>.</p>
+      </div>
+      <PriceTable head={['Услуга', 'Позиции', 'Цена «от»']} rows={priceRows} note={pricesData.note} />
+    </div>
+  </section>
+
+  <!-- Блок 9. Вопрос-ответ -->
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Частые вопросы</h2>
+        <p>Коротко по делу. <a href="/vopros-otvet/">Все 18 вопросов →</a></p>
+      </div>
+      <FaqList items={faqTop} />
+    </div>
+  </section>
+
+  <!-- Блок 10. Заявка -->
+  <section class="block alt" id="zayavka">
+    <div class="wrap">
+      <LeadForm />
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .hero {
+    background: var(--paper-soft);
+    padding: 64px 0 80px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .hero h1 { margin-bottom: 0; }
+  .hero h1 span { color: var(--accent); }
+  .lead {
+    font-size: 18px;
+    margin: 20px 0 32px;
+    max-width: 560px;
+    line-height: 1.6;
+  }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+  .trust-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 560px;
+  }
+  .trust { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--ink-muted); }
+  .trust strong {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+  .trust-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  section.block { padding: 72px 0; }
+  section.block.alt { background: var(--paper-soft); }
+  .section-head { text-align: center; max-width: 720px; margin: 0 auto 44px; }
+  .section-head p { font-size: 16px; margin-top: 10px; }
+
+  .aud-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .aud {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 28px 24px;
+    transition: all .2s;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .aud:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-2px); text-decoration: none; }
+  .aud h3 { font-size: 17px; margin-bottom: 8px; }
+  .aud p { font-size: 14px; line-height: 1.5; flex: 1; margin-bottom: 12px; }
+  .aud-more { font-family: var(--font-heading); font-weight: 700; font-size: 13px; color: var(--accent); }
+
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .step {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 32px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all .2s;
+  }
+  .step:hover { box-shadow: var(--shadow-md); }
+  .step-num {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 64px;
+    color: var(--accent);
+    opacity: .14;
+    position: absolute;
+    top: 8px; right: 14px;
+    line-height: 1;
+  }
+  .step h3 { font-size: 18px; margin-bottom: 10px; position: relative; }
+  .step p { font-size: 14px; line-height: 1.6; position: relative; }
+
+  .who-wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: start; }
+  .who-text { margin: 16px 0 24px; line-height: 1.7; }
+  .who-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .who-list li {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  @media (max-width: 900px) {
+    .hero { padding: 40px 0 56px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .trust-row { grid-template-columns: 1fr 1fr; }
+    section.block { padding: 48px 0; }
+    .aud-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .svc-grid, .cases-grid, .steps-grid { grid-template-columns: 1fr; gap: 14px; }
+    .who-wrap { grid-template-columns: 1fr; gap: 28px; }
+  }
+</style>

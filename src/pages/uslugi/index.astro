@@ -1,51 +1,74 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { SERVICES } from '../../data/site-map';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import LeadForm from '../../components/LeadForm.astro';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+
+const groups = {
+  stroitelnye: { title: 'Строительные', desc: 'Демонтаж, отделка, электрика, монолит, облицовка, ландшафт.' },
+  klining: { title: 'Клининг', desc: 'Уборка после ремонта, абонентский клининг, окна, территории.' },
+  'lyudi-na-smenu': { title: 'Люди на смену', desc: 'Грузчики и хелперы на объект или мероприятие.' }
+} as const;
+
+const byGroup = (g: string) => services.filter((s) => s.data.group === g);
+const groupKeys = Object.keys(groups) as Array<keyof typeof groups>;
 ---
 <BaseLayout
   title="Услуги — рабочие, мастера и бригады в Москве | ГрузМаркет77"
-  description="14 услуг: демонтаж, уборка, клининг, грузчики, отделка, электрика, монолит, дом под ключ, ландшафт. Цены от, бригады, сроки."
+  description="14 услуг: демонтаж, уборка после ремонта, клининг офисов, грузчики, отделка, электрика, монолит, дом под ключ, ландшафт. Цены от, бригады, сроки."
 >
-  <section class="hub">
+  <div class="wrap"><Breadcrumbs items={[{ title: 'Услуги' }]} /></div>
+
+  <section class="hub-hero">
     <div class="wrap">
-      <h1>Услуги</h1>
-      <p class="hub-note">Хаб услуг — 3 группы (corpus §6.0). Контент в разработке.</p>
-      <ul class="hub-list">
-        {SERVICES.map((s) => (
-          <li><a href={`/uslugi/${s.slug}/`}>{s.title}</a></li>
-        ))}
-      </ul>
+      <h1>Услуги — рабочие, мастера и бригады</h1>
+      <p>14 услуг для прорабов, УК, ивент-агентств и частных клиентов. От одного человека на смену до бригады 40. Москва и МО, выезд за 24–48 часов.</p>
+    </div>
+  </section>
+
+  {groupKeys.map((g) => {
+    const items = byGroup(g);
+    if (!items.length) return null;
+    const info = groups[g];
+    return (
+      <section class="group">
+        <div class="wrap">
+          <div class="group-head">
+            <h2>{info.title}</h2>
+            <p>{info.desc}</p>
+          </div>
+          <div class="svc-grid">
+            {items.map((s) => (
+              <ServiceCard slug={s.id} title={s.data.title} price_from={s.data.price_from} answer={s.data.answer} />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+
+  <section class="block alt">
+    <div class="wrap">
+      <LeadForm heading="Задача не укладывается в одну услугу?" sub="Опишите кратко — предложим бригаду и смету." />
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .hub { padding: 80px 0 120px; }
-  .hub h1 { margin-bottom: 12px; }
-  .hub-note { margin-bottom: 32px; color: var(--ink-muted); }
-  .hub-list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  .hub-list a {
-    display: block;
-    padding: 16px 20px;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    color: var(--ink);
-    font-family: var(--font-heading);
-    font-weight: 700;
-    text-decoration: none;
-    transition: all .15s;
-  }
-  .hub-list a:hover {
-    border-color: var(--accent);
-    box-shadow: var(--shadow-md);
-  }
+  .hub-hero { padding: 32px 0 40px; }
+  .hub-hero h1 { margin-bottom: 14px; }
+  .hub-hero p { font-size: 17px; max-width: 820px; }
+  .group { padding: 48px 0; }
+  .group:nth-of-type(even) { background: var(--paper-soft); }
+  .group-head { margin-bottom: 28px; }
+  .group-head p { font-size: 15px; margin-top: 6px; max-width: 720px; }
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .block { padding: 64px 0; }
+  .block.alt { background: var(--paper-soft); }
   @media (max-width: 900px) {
-    .hub-list { grid-template-columns: 1fr; }
+    .svc-grid { grid-template-columns: 1fr; }
   }
 </style>

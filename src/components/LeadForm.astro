@@ -1,0 +1,115 @@
+---
+// Форма заявки. До подключения Cloudflare Worker (этап 8) action-заглушка:
+// data-endpoint заменится на реальный URL воркера.
+interface Props {
+  compact?: boolean;
+  heading?: string;
+  sub?: string;
+}
+const { compact = false, heading = 'Оставьте заявку', sub = 'Ответим в течение 15 минут в рабочее время. Для срочных задач — звоните напрямую.' } = Astro.props;
+---
+<div class={`form-wrap ${compact ? 'compact' : ''}`}>
+  {!compact && (
+    <div class="form-head">
+      <h2>{heading}</h2>
+      <p>{sub}</p>
+    </div>
+  )}
+  <form class="lead-form" method="post" data-endpoint="/api/lead" novalidate>
+    <div class="form-grid">
+      <div class="field full">
+        <label for="lf-task">Что нужно сделать</label>
+        <input id="lf-task" name="task" type="text" placeholder="Например: демонтаж перегородок в офисе 60 м²" required />
+      </div>
+      <div class="field">
+        <label for="lf-name">Ваше имя</label>
+        <input id="lf-name" name="name" type="text" placeholder="Александр" autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="lf-phone">Телефон</label>
+        <input id="lf-phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel" required />
+      </div>
+      <div class="field full">
+        <label for="lf-when">Когда начать</label>
+        <select id="lf-when" name="when">
+          <option>Срочно, сегодня</option>
+          <option>Завтра утром</option>
+          <option>На этой неделе</option>
+          <option>На следующей неделе</option>
+          <option>Нужно обсудить</option>
+        </select>
+      </div>
+      <!-- honeypot -->
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+      <input type="hidden" name="page" value={Astro.url.pathname} />
+      <div class="full">
+        <button type="submit" class="btn btn-primary">Отправить заявку →</button>
+      </div>
+    </div>
+    <div class="form-hint">Нажимая кнопку, вы соглашаетесь с <a href="/politika/">политикой обработки персональных данных</a>.</div>
+    <div class="form-ok" hidden>Заявка отправлена. Перезвоним в течение 15 минут в рабочее время.</div>
+  </form>
+</div>
+
+<style>
+  .form-wrap {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 40px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .form-wrap.compact { padding: 28px; box-shadow: var(--shadow-lift); border: 1px solid var(--border); }
+  .form-head { text-align: center; margin-bottom: 28px; }
+  .form-head p { margin-top: 10px; font-size: 15px; }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-grid .full { grid-column: 1 / -1; }
+  .field label {
+    display: block;
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .field input, .field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 14px;
+    background: #fff;
+    color: var(--ink);
+  }
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .hp { position: absolute; left: -9999px; height: 0; width: 0; opacity: 0; }
+  .lead-form .btn { width: 100%; justify-content: center; padding: 16px; }
+  .form-hint {
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-top: 16px;
+  }
+  .form-ok {
+    margin-top: 16px;
+    background: #E8F5E9;
+    color: var(--success);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+  }
+  @media (max-width: 900px) {
+    .form-wrap { padding: 24px; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>

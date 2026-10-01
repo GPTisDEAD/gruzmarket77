@@ -1,0 +1,90 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  tag: string;
+  duration: string;
+  crew: string;
+  total: string;
+  gradient?: string;
+}
+const { slug, title, tag, duration, crew, total, gradient = 'linear-gradient(135deg,#1C252B,#3A4047)' } = Astro.props;
+const totalShort = total.split('(')[0].trim();
+---
+<article class="case-card">
+  <a href={`/kejsy/${slug}/`} class="case-visual" style={`background:${gradient}`}>
+    <span>до → после</span>
+  </a>
+  <div class="case-body">
+    <span class="case-tag">{tag}</span>
+    <h3><a href={`/kejsy/${slug}/`}>{title}</a></h3>
+    <div class="case-stats">
+      <span>{duration}</span><span>·</span><span>{crew.split('+')[0].trim()}</span><span>·</span><strong>{totalShort}</strong>
+    </div>
+  </div>
+</article>
+
+<style>
+  .case-card {
+    background: #fff;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all .2s;
+  }
+  .case-card:hover { box-shadow: var(--shadow-lift); transform: translateY(-3px); }
+  .case-visual {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 16px;
+    opacity: .9;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+  }
+  .case-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(255,255,255,.03) 15px, rgba(255,255,255,.03) 30px);
+  }
+  .case-body { padding: 20px; }
+  .case-tag {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  .case-body h3 {
+    font-size: 16px;
+    margin: 10px 0 12px;
+    line-height: 1.4;
+  }
+  .case-body h3 a { color: var(--ink); text-decoration: none; }
+  .case-body h3 a:hover { color: var(--accent); }
+  .case-stats {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--ink-muted);
+    flex-wrap: wrap;
+  }
+  .case-stats strong {
+    color: var(--accent);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 14px;
+  }
+</style>

@@ -1,10 +1,69 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageStub from '../components/PageStub.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import LeadForm from '../components/LeadForm.astro';
+
+const facts = [
+  { h: '40 человек в базе', d: 'Половина — постоянный костяк, работает с нами годами. Половина — проверенный резерв под пиковые заказы и большие бригады.' },
+  { h: 'Специализации', d: 'Демонтажники, отделочники (штукатурка, ГКЛ, плитка), электрики, сантехники, бетонщики, клинеры и уборщицы, грузчики и хелперы, ландшафтные рабочие.' },
+  { h: 'Документы у каждого', d: 'Паспорт, регистрация, патент/разрешение на работу для граждан СНГ — предъявляем до выхода на объект. Электрики — с группой по электробезопасности.' },
+  { h: 'Состав бригад', d: 'Русскоязычные и смешанные. Подбираем под задачу и требования объекта. Бригадир на объекте всегда говорит по-русски.' },
+  { h: 'Как отбираем', d: 'Рекомендация от действующего мастера → проверка документов → первый выход под контролем бригадира → в постоянную базу.' },
+  { h: 'Бригадир на объекте', d: 'Одна точка контакта: приёмка задачи, контроль, замена людей, отчёт заказчику.' },
+  { h: 'Замена по претензии', d: 'В день обращения. Простой по нашей вине — за наш счёт.' }
+];
 ---
 <BaseLayout
-  title="Мастера | ГрузМаркет77"
-  description="Наши мастера: проверка, допуски, бригадиры."
+  title="Мастера — кто придёт на ваш объект | ГрузМаркет77"
+  description="40 мастеров в базе: демонтажники, отделочники, электрики, сантехники, клинеры, грузчики. Документы у каждого. Бригадир с русским языком."
 >
-  <PageStub title="Мастера" corpus="§9" />
+  <div class="wrap"><Breadcrumbs items={[{ title: 'Мастера' }]} /></div>
+
+  <section class="hub-hero">
+    <div class="wrap">
+      <h1>Кто придёт на ваш объект</h1>
+      <p>40 проверенных мастеров, документы у каждого, бригадир — одна точка контакта. Отбор по рекомендациям, работа по специализациям, замена в день претензии.</p>
+    </div>
+  </section>
+
+  <section class="facts">
+    <div class="wrap">
+      {facts.map((f) => (
+        <div class="fact">
+          <h3>{f.h}</h3>
+          <p>{f.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="block alt">
+    <div class="wrap">
+      <LeadForm heading="Нужны мастера на объект?" sub="Опишите задачу — подберём бригаду под неё." />
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .hub-hero { padding: 32px 0 36px; }
+  .hub-hero h1 { margin-bottom: 14px; }
+  .hub-hero p { font-size: 17px; max-width: 820px; }
+
+  .facts { padding: 32px 0 64px; }
+  .facts .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .fact {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 24px 28px;
+  }
+  .fact h3 { font-size: 18px; margin-bottom: 10px; }
+  .fact p { font-size: 15px; line-height: 1.6; }
+
+  .block { padding: 64px 0; }
+  .block.alt { background: var(--paper-soft); }
+
+  @media (max-width: 900px) {
+    .facts .wrap { grid-template-columns: 1fr; }
+  }
+</style>

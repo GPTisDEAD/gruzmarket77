@@ -1,0 +1,67 @@
+---
+interface Row { [key: string]: string }
+interface Props {
+  head: string[];
+  rows: string[][];
+  note?: string;
+}
+const { head, rows, note } = Astro.props;
+---
+<div class="price-wrap">
+  <table class="price">
+    <thead>
+      <tr>{head.map((h) => <th>{h}</th>)}</tr>
+    </thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>{r.map((cell, i) => <td class={i === r.length - 1 ? 'num' : ''}>{cell}</td>)}</tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+{note && <p class="price-note">{note}</p>}
+
+<style>
+  .price-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+  table.price {
+    width: 100%;
+    background: #fff;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  table.price thead th {
+    background: var(--ink);
+    color: #fff;
+    text-align: left;
+    padding: 14px 20px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  table.price tbody td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink);
+    vertical-align: top;
+  }
+  table.price tbody tr:nth-child(even) { background: var(--paper-stripe); }
+  table.price tbody tr:hover { background: var(--accent-soft); }
+  table.price .num {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .price-note {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+</style>

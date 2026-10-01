@@ -1,10 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageStub from '../components/PageStub.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import LeadForm from '../components/LeadForm.astro';
+import company from '../content/company.json';
 ---
 <BaseLayout
-  title="Оставить заявку | ГрузМаркет77"
-  description="Форма заявки: ответим в течение 15 минут."
+  title="Оставить заявку — бригада на объект за 24–48 часов | ГрузМаркет77"
+  description="Форма заявки: ответим в течение 15 минут в рабочее время, назовём цену и состав бригады. Или звоните напрямую."
 >
-  <PageStub title="Оставить заявку" corpus="§13.2" />
+  <div class="wrap"><Breadcrumbs items={[{ title: 'Заявка' }]} /></div>
+
+  <section class="hub-hero">
+    <div class="wrap">
+      <h1>Оставить заявку</h1>
+      <p>Ответим в течение 15 минут в рабочее время. Для срочных задач — звоните напрямую:
+        <a href={`tel:${company.phone_tel}`}>{company.phone}</a>.</p>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="wrap">
+      <LeadForm heading="Опишите задачу" />
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .hub-hero { padding: 32px 0 36px; }
+  .hub-hero h1 { margin-bottom: 14px; }
+  .hub-hero p { font-size: 17px; max-width: 820px; }
+  .form-section { padding: 24px 0 80px; background: var(--paper-soft); }
+</style>
