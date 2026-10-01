@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageStub from '../components/PageStub.astro';
+import { AUDIENCES } from '../data/site-map';
+
+export function getStaticPaths() {
+  return AUDIENCES.map((a) => ({ params: { audience: a.slug }, props: { item: a } }));
+}
+
+const { item } = Astro.props;
+---
+<BaseLayout
+  title={`${item.title} — рабочие и бригады | ГрузМаркет77`}
+  description={`${item.title}: услуги, цены, условия, кейсы. Москва и МО.`}
+>
+  <PageStub title={item.title} corpus={item.corpus} />
+</BaseLayout>

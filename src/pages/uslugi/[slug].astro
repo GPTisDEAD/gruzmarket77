@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageStub from '../../components/PageStub.astro';
+import { SERVICES } from '../../data/site-map';
+
+export function getStaticPaths() {
+  return SERVICES.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+
+const { service } = Astro.props;
+---
+<BaseLayout
+  title={`${service.title} в Москве — цены, бригада, сроки | ГрузМаркет77`}
+  description={`${service.title}: цена от, состав бригады, сроки выхода. Москва и МО. Договор, безнал, оплата по факту.`}
+>
+  <PageStub title={service.title} corpus={service.corpus} />
+</BaseLayout>

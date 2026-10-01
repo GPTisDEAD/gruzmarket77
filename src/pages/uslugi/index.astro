@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SERVICES } from '../../data/site-map';
+---
+<BaseLayout
+  title="Услуги — рабочие, мастера и бригады в Москве | ГрузМаркет77"
+  description="14 услуг: демонтаж, уборка, клининг, грузчики, отделка, электрика, монолит, дом под ключ, ландшафт. Цены от, бригады, сроки."
+>
+  <section class="hub">
+    <div class="wrap">
+      <h1>Услуги</h1>
+      <p class="hub-note">Хаб услуг — 3 группы (corpus §6.0). Контент в разработке.</p>
+      <ul class="hub-list">
+        {SERVICES.map((s) => (
+          <li><a href={`/uslugi/${s.slug}/`}>{s.title}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hub { padding: 80px 0 120px; }
+  .hub h1 { margin-bottom: 12px; }
+  .hub-note { margin-bottom: 32px; color: var(--ink-muted); }
+  .hub-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .hub-list a {
+    display: block;
+    padding: 16px 20px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all .15s;
+  }
+  .hub-list a:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+  }
+  @media (max-width: 900px) {
+    .hub-list { grid-template-columns: 1fr; }
+  }
+</style>

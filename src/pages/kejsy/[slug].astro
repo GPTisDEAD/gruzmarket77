@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageStub from '../../components/PageStub.astro';
+import { CASES } from '../../data/site-map';
+
+export function getStaticPaths() {
+  return CASES.map((c) => ({ params: { slug: c.slug }, props: { item: c } }));
+}
+
+const { item } = Astro.props;
+---
+<BaseLayout
+  title={`${item.title} — кейс | ГрузМаркет77`}
+  description={`Кейс: ${item.title}. Сроки, состав бригады, итоговая сумма.`}
+>
+  <PageStub title={item.title} corpus={item.corpus} />
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  corpus?: string;
+}
+const { title, corpus } = Astro.props;
+---
+<section class="stub">
+  <div class="wrap">
+    <h1>{title}</h1>
+    <p class="stub-note">
+      Страница в разработке. Контент — {corpus ? `corpus.md ${corpus}` : 'corpus.md'}.
+    </p>
+    <a href="/" class="btn btn-primary">На главную</a>
+  </div>
+</section>
+
+<style>
+  .stub {
+    padding: 100px 0 140px;
+    background: var(--paper-soft);
+    min-height: 50vh;
+  }
+  .stub h1 { margin-bottom: 16px; }
+  .stub-note {
+    font-size: 15px;
+    color: var(--ink-muted);
+    margin-bottom: 28px;
+  }
+</style>
