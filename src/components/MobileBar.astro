@@ -1,0 +1,55 @@
+---
+import company from '../content/company.json';
+---
+<div class="mob-bar" role="navigation" aria-label="Быстрые действия">
+  <a href={`https://wa.me/${company.whatsapp}`} rel="nofollow noopener">
+    <span class="ico" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4 0-.5.1-.7l.4-.5c.1-.2.1-.3 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7a11 11 0 0 0 4.2 3.7c.6.2 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3Z"/></svg>
+    </span>
+    WhatsApp
+  </a>
+  <a href={`tel:${company.phone_tel}`}>
+    <span class="ico" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg>
+    </span>
+    Позвонить
+  </a>
+  <a href="/zayavka/" class="cta">
+    <span class="ico" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg>
+    </span>
+    Заявка
+  </a>
+</div>
+
+<style>
+  .mob-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--ink);
+    display: none;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    z-index: 100;
+  }
+  .mob-bar a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 4px;
+    color: #fff;
+    font-size: 11px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    background: var(--ink);
+    text-decoration: none;
+  }
+  .mob-bar a.cta { background: var(--accent); }
+  .mob-bar .ico { margin-bottom: 3px; display: flex; }
+  @media (max-width: 900px) {
+    .mob-bar { display: grid; }
+  }
+</style>

@@ -1,0 +1,116 @@
+---
+import company from '../content/company.json';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">Груз<span>Маркет</span>77</div>
+        <div class="foot-nap">
+          <strong>{company.name}</strong>
+          ИНН {company.inn} · ОГРНИП {company.ogrnip}<br />
+          {company.area}<br />
+          {company.hours_requests}<br />
+          {company.hours_dispatch}
+        </div>
+      </div>
+      <div>
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="/uslugi/demontazh/">Демонтаж</a></li>
+          <li><a href="/uslugi/gruzchiki/">Грузчики</a></li>
+          <li><a href="/uslugi/uborka-posle-remonta/">Уборка после ремонта</a></li>
+          <li><a href="/uslugi/otdelochnye-raboty/">Отделка</a></li>
+          <li><a href="/uslugi/">Все услуги →</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="/dlya-biznesa/">Для бизнеса</a></li>
+          <li><a href="/kejsy/">Кейсы</a></li>
+          <li><a href="/tseny/">Цены</a></li>
+          <li><a href="/vopros-otvet/">Вопрос-ответ</a></li>
+          <li><a href="/kak-my-rabotaem/">Как мы работаем</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Связь</h4>
+        <ul>
+          <li><a href={`tel:${company.phone_tel}`}>{company.phone}</a></li>
+          <li><a href={`https://wa.me/${company.whatsapp}`} rel="nofollow noopener">WhatsApp</a></li>
+          {company.telegram && <li><a href={`https://t.me/${company.telegram}`} rel="nofollow noopener">Telegram</a></li>}
+          <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© {year} {company.name} · {company.domain}</div>
+      <div><a href="/politika/">Политика конфиденциальности</a></div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: #fff;
+    padding: 48px 0 24px;
+    margin-top: 80px;
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+  .foot-logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+  .foot-logo span { color: var(--accent); }
+  .site-footer h4 {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    color: #fff;
+  }
+  .site-footer ul { list-style: none; }
+  .site-footer li { margin-bottom: 8px; }
+  .site-footer a {
+    color: #CBD2DA;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .site-footer a:hover { color: var(--accent); }
+  .foot-nap {
+    color: #CBD2DA;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .foot-nap strong {
+    color: #fff;
+    display: block;
+    margin-bottom: 6px;
+    font-family: var(--font-heading);
+  }
+  .foot-bottom {
+    border-top: 1px solid #3A4047;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #868C92;
+  }
+  .foot-bottom a { color: #868C92; }
+  @media (max-width: 900px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .foot-bottom { flex-direction: column; gap: 8px; }
+  }
+</style>
