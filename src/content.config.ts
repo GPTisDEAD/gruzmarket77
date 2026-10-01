@@ -5,12 +5,12 @@ const services = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/services' }),
   schema: z.object({
     title: z.string(),
-    slug_override: z.string().optional(),
+    h1: z.string(),
     price_from: z.string(),
     brigade: z.string(),
     duration: z.string(),
     answer: z.string(), // AEO-абзац: прямой ответ с цифрами
-    group: z.enum(['demontazh-stroyka', 'klining', 'kompleks']),
+    group: z.enum(['stroitelnye', 'klining', 'lyudi-na-smenu']),
     related: z.array(z.string()).default([]),
     case_ref: z.string().optional(),
     order: z.number().default(100)
