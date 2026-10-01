@@ -42,6 +42,7 @@ const { compact = false, heading = 'Оставьте заявку', sub = 'От�
       <!-- honeypot -->
       <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
       <input type="hidden" name="page" value={Astro.url.pathname} />
+      <input type="hidden" name="utm" value="" />
       <div class="full">
         <button type="submit" class="btn btn-primary">Отправить заявку →</button>
       </div>
@@ -57,6 +58,32 @@ const { compact = false, heading = 'Оставьте заявку', sub = 'От�
   // иначе — рабочий фолбэк: открываем WhatsApp с предзаполненной заявкой.
   const ENDPOINT = import.meta.env.PUBLIC_LEAD_ENDPOINT || '';
   const WA = '79266143959';
+
+  // UTM first-touch: ловим метки на входе, храним сессию, подставляем в форму.
+  const UTM_KEY = 'gm_utm';
+  try {
+    const params = new URLSearchParams(location.search);
+    const utmPairs = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'yclid', 'gclid']
+      .map((k) => (params.get(k) ? `${k}=${params.get(k)}` : null))
+      .filter(Boolean);
+    if (utmPairs.length && !sessionStorage.getItem(UTM_KEY)) {
+      sessionStorage.setItem(UTM_KEY, utmPairs.join('&'));
+    }
+  } catch { /* приватный режим — живём без utm */ }
+
+  const savedUtm = (() => { try { return sessionStorage.getItem(UTM_KEY) || ''; } catch { return ''; } })();
+  document.querySelectorAll<HTMLInputElement>('.lead-form input[name="utm"]').forEach((i) => { i.value = savedUtm; });
+
+  // Конверсия: цель в Метрику + dataLayer (для Андаты/GTM) — в обоих режимах отправки.
+  function fireLeadGoal(mode: string) {
+    try {
+      const w = window as any;
+      if (typeof w.ym === 'function' && import.meta.env.PUBLIC_YM_ID) {
+        w.ym(Number(import.meta.env.PUBLIC_YM_ID), 'reachGoal', 'lead_submit', { mode });
+      }
+      (w.dataLayer = w.dataLayer || []).push({ event: 'lead_submit', mode, page: location.pathname });
+    } catch { /* аналитика не должна ломать отправку */ }
+  }
 
   document.querySelectorAll<HTMLFormElement>('.lead-form').forEach((form) => {
     form.addEventListener('submit', async (e) => {
@@ -79,6 +106,7 @@ const { compact = false, heading = 'Оставьте заявку', sub = 'От�
           if (!r.ok) throw new Error(String(r.status));
           form.reset();
           ok.hidden = false;
+          fireLeadGoal('worker');
           return;
         } catch {
           err.hidden = false;
@@ -98,6 +126,7 @@ const { compact = false, heading = 'Оставьте заявку', sub = 'От�
       window.open(`https://wa.me/${WA}?text=${text}`, '_blank', 'noopener');
       ok.textContent = 'Открыли WhatsApp с текстом заявки — нажмите «Отправить» в чате.';
       ok.hidden = false;
+      fireLeadGoal('whatsapp');
     });
   });
 </script>

@@ -13,7 +13,10 @@ import company from '../content/company.json';
         <li><a href="/kontakty/">Контакты</a></li>
       </ul>
     </nav>
-    <a href={`tel:${company.phone_tel}`} class="hdr-phone">{company.phone}</a>
+    <div class="hdr-right">
+      <a href={`tel:${company.phone_tel}`} class="hdr-phone">{company.phone}</a>
+      <a href="/zayavka/" class="hdr-cta">Заявка</a>
+    </div>
   </div>
 </header>
 
@@ -51,6 +54,11 @@ import company from '../content/company.json';
     text-decoration: none;
   }
   nav a:hover { color: var(--accent); }
+  .hdr-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
   .hdr-phone {
     font-family: var(--font-heading);
     font-weight: 700;
@@ -58,8 +66,21 @@ import company from '../content/company.json';
     font-size: 16px;
     text-decoration: none;
   }
+  .hdr-cta {
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: background .15s;
+  }
+  .hdr-cta:hover { background: var(--accent-hover); }
   @media (max-width: 900px) {
     nav { display: none; }
     .hdr-phone { font-size: 14px; }
+    .hdr-cta { display: none; } /* на мобилке есть нижняя панель */
   }
 </style>
