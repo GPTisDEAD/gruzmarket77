@@ -48,8 +48,59 @@ const { compact = false, heading = 'Оставьте заявку', sub = 'От�
     </div>
     <div class="form-hint">Нажимая кнопку, вы соглашаетесь с <a href="/politika/">политикой обработки персональных данных</a>.</div>
     <div class="form-ok" hidden>Заявка отправлена. Перезвоним в течение 15 минут в рабочее время.</div>
+    <div class="form-err" hidden>Не получилось отправить. Позвоните или напишите в WhatsApp — кнопки внизу экрана.</div>
   </form>
 </div>
+
+<script>
+  // Отправка: в Cloudflare Worker, если он настроен (PUBLIC_LEAD_ENDPOINT),
+  // иначе — рабочий фолбэк: открываем WhatsApp с предзаполненной заявкой.
+  const ENDPOINT = import.meta.env.PUBLIC_LEAD_ENDPOINT || '';
+  const WA = '79266143959';
+
+  document.querySelectorAll<HTMLFormElement>('.lead-form').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const ok = form.querySelector<HTMLElement>('.form-ok')!;
+      const err = form.querySelector<HTMLElement>('.form-err')!;
+      ok.hidden = true; err.hidden = true;
+
+      const phone = String(fd.get('phone') || '').replace(/[^\d+]/g, '');
+      if (phone.length < 10) {
+        err.textContent = 'Проверьте телефон — минимум 10 цифр.';
+        err.hidden = false;
+        return;
+      }
+
+      if (ENDPOINT) {
+        try {
+          const r = await fetch(ENDPOINT, { method: 'POST', body: fd });
+          if (!r.ok) throw new Error(String(r.status));
+          form.reset();
+          ok.hidden = false;
+          return;
+        } catch {
+          err.hidden = false;
+          return;
+        }
+      }
+
+      // Фолбэк: WhatsApp с текстом заявки
+      const text = encodeURIComponent(
+        `Заявка с сайта gruzmarket77.ru\n` +
+        `Задача: ${fd.get('task') || '—'}\n` +
+        `Имя: ${fd.get('name') || '—'}\n` +
+        `Телефон: ${fd.get('phone')}\n` +
+        `Когда: ${fd.get('when') || '—'}\n` +
+        `Страница: ${fd.get('page') || ''}`
+      );
+      window.open(`https://wa.me/${WA}?text=${text}`, '_blank', 'noopener');
+      ok.textContent = 'Открыли WhatsApp с текстом заявки — нажмите «Отправить» в чате.';
+      ok.hidden = false;
+    });
+  });
+</script>
 
 <style>
   .form-wrap {
@@ -102,6 +153,16 @@ const { compact = false, heading = 'Оставьте заявку', sub = 'От�
     margin-top: 16px;
     background: #E8F5E9;
     color: var(--success);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+  }
+  .form-err {
+    margin-top: 16px;
+    background: #FDECEA;
+    color: var(--danger);
     border-radius: var(--radius-sm);
     padding: 14px 18px;
     font-weight: 600;

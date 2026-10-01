@@ -1,0 +1,19 @@
+# Cloudflare Worker — приём заявок GruzMarket77
+# Деплой: cd worker && npx wrangler deploy
+# Секреты (один раз):
+#   npx wrangler secret put TELEGRAM_BOT_TOKEN
+#   npx wrangler secret put TELEGRAM_CHAT_ID
+#   npx wrangler secret put GOOGLE_SA_KEY      # JSON сервис-аккаунта одной строкой
+#   npx wrangler secret put SHEETS_ID          # ID таблицы из её URL
+name = "gruzmarket77-lead"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://gruzmarket77.ru"
+
+# Rate-limit: KV namespace (создать: npx wrangler kv namespace create RATE)
+# затем вписать id сюда:
+# [[kv_namespaces]]
+# binding = "RATE"
+# id = "..."

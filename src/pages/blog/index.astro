@@ -1,10 +1,82 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageStub from '../../components/PageStub.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const top = services.slice(0, 6);
+
+const upcoming = [
+  'Сколько стоит демонтаж квартиры в Москве в 2026 году',
+  'Как прорабу закрыть нехватку рабочих на объекте за сутки',
+  'Уборка после ремонта: что входит, сколько занимает, как принимать',
+  'Грузчики на мероприятие: как считать людей и смены',
+  'Аутстаффинг рабочих или подрядчик под ключ — что выгоднее прорабу',
+  'Клининговой компании не хватает людей: субподряд без риска',
+  'Абонентский клининг офиса: как выбрать подрядчика',
+  'Уборка территории для УК: что должно входить и сколько стоит'
+];
 ---
 <BaseLayout
   title="Блог — полезное о рабочих, ремонте и клининге | ГрузМаркет77"
-  description="Статьи: как выбрать бригаду, сколько стоит демонтаж, уборка после ремонта и другое."
+  description="Статьи о найме бригад, демонтаже, уборке после ремонта, клининге и аутстаффинге рабочих. Скоро первые публикации."
 >
-  <PageStub title="Блог" corpus="§12 — 8 стартовых тем, после MVP" />
+  <div class="wrap"><Breadcrumbs items={[{ title: 'Блог' }]} /></div>
+
+  <section class="hub-hero">
+    <div class="wrap">
+      <h1>Блог</h1>
+      <p>Готовим первые восемь статей — практические разборы с ценами и цифрами. Пока они пишутся, ответы на главные вопросы уже есть на страницах услуг и в <a href="/vopros-otvet/">вопрос-ответе</a>.</p>
+    </div>
+  </section>
+
+  <section class="soon">
+    <div class="wrap">
+      <h2>Что выйдет первым</h2>
+      <ul class="soon-list">
+        {upcoming.map((t) => <li>{t}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="block alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>А пока — к делу</h2>
+        <p>Шесть услуг, которые заказывают чаще всего.</p>
+      </div>
+      <div class="svc-grid">
+        {top.map((s) => (
+          <ServiceCard slug={s.id} title={s.data.title} price_from={s.data.price_from} answer={s.data.answer} />
+        ))}
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .hub-hero { padding: 32px 0 36px; }
+  .hub-hero h1 { margin-bottom: 14px; }
+  .hub-hero p { font-size: 17px; max-width: 820px; }
+  .soon { padding: 16px 0 56px; }
+  .soon h2 { margin-bottom: 20px; }
+  .soon-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .soon-list li {
+    background: #fff;
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    font-size: 15px;
+    color: var(--ink-muted);
+  }
+  .block { padding: 64px 0; }
+  .block.alt { background: var(--paper-soft); }
+  .section-head { text-align: center; margin: 0 auto 36px; }
+  .section-head p { margin-top: 8px; }
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) {
+    .soon-list { grid-template-columns: 1fr; }
+    .svc-grid { grid-template-columns: 1fr; }
+  }
+</style>
