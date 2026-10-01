@@ -1,0 +1,71 @@
+name: Sync from work repo and deploy
+
+# Кнопочная доставка без Mac: тянет site/ из рабочей репы
+# GPTisDEAD/ciriycpro-online (ветка claude/vibrant-lovelace-m8u2cd),
+# коммитит в прод и деплоит на Pages. Запуск: Actions → Run workflow.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  sync-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pull site/ from work repo
+        run: |
+          git clone --depth 1 -b claude/vibrant-lovelace-m8u2cd \
+            https://github.com/GPTisDEAD/ciriycpro-online /tmp/work
+          rsync -a --delete --exclude='.git' /tmp/work/site/ ./
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes — rebuilding current state."
+          else
+            git commit -m "sync: $(cd /tmp/work && git log -1 --pretty=%s)"
+            git push
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      # ВРЕМЕННО до DNS (ADR-007): перепись корневых URL под подпапку
+      - name: Rewrite root-absolute URLs for project-pages preview
+        run: |
+          find dist \( -name '*.html' -o -name '*.xml' \) -print0 | xargs -0 sed -i \
+            -e 's|href="/|href="/gruzmarket77/|g' \
+            -e 's|src="/|src="/gruzmarket77/|g' \
+            -e 's|href="/gruzmarket77/gruzmarket77/|href="/gruzmarket77/|g'
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: sync-build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
