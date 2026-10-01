@@ -1,0 +1,153 @@
+/* GruzMarket77 — global tokens v2 (from CANON §8) */
+
+:root {
+  /* Palette */
+  --ink: #1C252B;
+  --ink-muted: #4B5053;
+  --paper: #FFFFFF;
+  --paper-soft: #F7F9FB;
+  --paper-stripe: #EEF1F5;
+
+  --accent: #F47B20;
+  --accent-hover: #D96610;
+  --accent-soft: #FFF2E6;
+
+  --success: #2E7D32;
+  --warning: #FBBF24;
+  --danger: #D40000;
+
+  --border: #EDEDED;
+  --border-strong: #D9DDDF;
+
+  /* Typography */
+  --font-heading: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --fs-xs: 13px;
+  --fs-sm: 14px;
+  --fs-base: 16px;
+  --fs-lg: 18px;
+  --fs-h3: 22px;
+  --fs-h2: 32px;
+  --fs-h1: 48px;
+  --fs-hero: 56px;
+
+  --lh-tight: 1.2;
+  --lh-base: 1.5;
+  --lh-loose: 1.7;
+
+  /* Shape */
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0 4px 18px rgba(8,35,48,.08);
+  --shadow-lift: 0 6px 36px rgba(38,62,77,.1);
+
+  --container: 1200px;
+  --grid-gap: 24px;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  line-height: var(--lh-tight);
+  color: var(--ink);
+}
+
+h1 { font-size: var(--fs-h1); letter-spacing: -0.5px; }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+
+p { color: var(--ink-muted); }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+img, svg { max-width: 100%; height: auto; display: block; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Layout */
+.wrap {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  transition: all .15s ease;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--border-strong);
+}
+.btn-ghost:hover {
+  border-color: var(--ink);
+  text-decoration: none;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  :root {
+    --fs-h1: 34px;
+    --fs-h2: 26px;
+    --fs-hero: 40px;
+  }
+  body { padding-bottom: 60px; }
+}

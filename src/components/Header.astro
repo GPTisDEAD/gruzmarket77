@@ -1,0 +1,65 @@
+---
+import company from '../content/company.json';
+---
+<header class="site-header">
+  <div class="wrap hdr">
+    <a href="/" class="logo">Груз<span>Маркет</span>77</a>
+    <nav aria-label="Основное меню">
+      <ul>
+        <li><a href="/uslugi/">Услуги</a></li>
+        <li><a href="/dlya-biznesa/">Для бизнеса</a></li>
+        <li><a href="/kejsy/">Кейсы</a></li>
+        <li><a href="/tseny/">Цены</a></li>
+        <li><a href="/kontakty/">Контакты</a></li>
+      </ul>
+    </nav>
+    <a href={`tel:${company.phone_tel}`} class="hdr-phone">{company.phone}</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .hdr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+  }
+  .logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  nav a {
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  nav a:hover { color: var(--accent); }
+  .hdr-phone {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 16px;
+    text-decoration: none;
+  }
+  @media (max-width: 900px) {
+    nav { display: none; }
+    .hdr-phone { font-size: 14px; }
+  }
+</style>

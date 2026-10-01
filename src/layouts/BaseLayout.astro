@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import company from '../content/company.json';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileBar from '../components/MobileBar.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description = 'Аутстаффинг рабочих, мастеров и бригад на объекты Москвы и МО. Бригада за 24-48 часов. Договор, безнал, замена бесплатно.',
+  canonical,
+  ogImage = '/og-default.jpg',
+  bodyClass = ''
+} = Astro.props;
+
+const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).toString();
+---
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+  <link rel="alternate" type="text/markdown" href={canonicalUrl.replace(/\/$/, '') + '.md'} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content="ru_RU" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body class={bodyClass}>
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <MobileBar />
+</body>
+</html>
