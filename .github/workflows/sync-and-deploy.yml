@@ -26,7 +26,9 @@ jobs:
         run: |
           git clone --depth 1 -b claude/vibrant-lovelace-m8u2cd \
             https://github.com/GPTisDEAD/ciriycpro-online /tmp/work
-          rsync -a --delete --exclude='.git' /tmp/work/site/ ./
+          # .github исключён: GITHUB_TOKEN не вправе пушить workflow-файлы.
+          # Обновление workflows доставляется только sync-site.sh с Мака.
+          rsync -a --delete --exclude='.git' --exclude='.github' /tmp/work/site/ ./
 
       - name: Commit if changed
         run: |
