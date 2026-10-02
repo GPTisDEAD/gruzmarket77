@@ -25,16 +25,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      # ВРЕМЕННО, до подключения домена gruzmarket77.ru:
-      # сайт живёт на ciriycpro.github.io/gruzmarket77/ — переписываем
-      # корневые абсолютные ссылки под подпапку. При переходе на домен
-      # этот шаг удаляется и возвращается public/CNAME.
-      - name: Rewrite root-absolute URLs for project-pages preview
-        run: |
-          find dist \( -name '*.html' -o -name '*.xml' \) -print0 | xargs -0 sed -i \
-            -e 's|href="/|href="/gruzmarket77/|g' \
-            -e 's|src="/|src="/gruzmarket77/|g' \
-            -e 's|href="/gruzmarket77/gruzmarket77/|href="/gruzmarket77/|g'
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
