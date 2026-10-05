@@ -1,0 +1,432 @@
+From e8161de1945c288535473b34f7ae93f8d8ab0de9 Mon Sep 17 00:00:00 2001
+From: Artem Yakshin <inbox@ciriyc.ru>
+Date: Thu, 1 Oct 2026 21:04:34 +0000
+Subject: [PATCH] =?UTF-8?q?scaffold:=20astro=20skeleton=20partial=20?=
+ =?UTF-8?q?=E2=80=94=20package.json,=20config,=20tokens,=20base=20layout,?=
+ =?UTF-8?q?=20header?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Interim commit — hosting decision (separate repo gptisdead/gruzmarket77)
+pending. Site code lives in /site/ until migration.
+
+Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01LcHcbgJ8c8fmeUzY252jxt
+---
+ site/.gitignore                   |   8 ++
+ site/astro.config.mjs             |  24 +++++
+ site/package.json                 |  17 ++++
+ site/src/components/Header.astro  |  65 +++++++++++++
+ site/src/content/company.json     |  18 ++++
+ site/src/layouts/BaseLayout.astro |  57 +++++++++++
+ site/src/styles/global.css        | 153 ++++++++++++++++++++++++++++++
+ site/tsconfig.json                |   5 +
+ 8 files changed, 347 insertions(+)
+ create mode 100644 site/.gitignore
+ create mode 100644 site/astro.config.mjs
+ create mode 100644 site/package.json
+ create mode 100644 site/src/components/Header.astro
+ create mode 100644 site/src/content/company.json
+ create mode 100644 site/src/layouts/BaseLayout.astro
+ create mode 100644 site/src/styles/global.css
+ create mode 100644 site/tsconfig.json
+
+diff --git a/site/.gitignore b/site/.gitignore
+new file mode 100644
+index 0000000..f7f1a6b
+--- /dev/null
++++ b/site/.gitignore
+@@ -0,0 +1,8 @@
++node_modules/
++dist/
++.astro/
++.env
++.env.*
++!.env.example
++.DS_Store
++*.log
+diff --git a/site/astro.config.mjs b/site/astro.config.mjs
+new file mode 100644
+index 0000000..632b66f
+--- /dev/null
++++ b/site/astro.config.mjs
+@@ -0,0 +1,24 @@
++import { defineConfig } from 'astro/config';
++import sitemap from '@astrojs/sitemap';
++
++export default defineConfig({
++  site: 'https://gruzmarket77.ru',
++  output: 'static',
++  trailingSlash: 'always',
++  build: {
++    format: 'directory',
++    assets: 'assets',
++    inlineStylesheets: 'auto'
++  },
++  integrations: [
++    sitemap({
++      changefreq: 'weekly',
++      priority: 0.7
++    })
++  ],
++  vite: {
++    build: {
++      cssMinify: 'esbuild'
++    }
++  }
++});
+diff --git a/site/package.json b/site/package.json
+new file mode 100644
+index 0000000..c9cdf14
+--- /dev/null
++++ b/site/package.json
+@@ -0,0 +1,17 @@
++{
++  "name": "gruzmarket77-site",
++  "version": "0.1.0",
++  "private": true,
++  "type": "module",
++  "scripts": {
++    "dev": "astro dev",
++    "start": "astro dev",
++    "build": "astro build",
++    "preview": "astro preview",
++    "astro": "astro"
++  },
++  "dependencies": {
++    "astro": "^5.0.0",
++    "@astrojs/sitemap": "^3.2.0"
++  }
++}
+diff --git a/site/src/components/Header.astro b/site/src/components/Header.astro
+new file mode 100644
+index 0000000..7e226c3
+--- /dev/null
++++ b/site/src/components/Header.astro
+@@ -0,0 +1,65 @@
++---
++import company from '../content/company.json';
++---
++<header class="site-header">
++  <div class="wrap hdr">
++    <a href="/" class="logo">Груз<span>Маркет</span>77</a>
++    <nav aria-label="Основное меню">
++      <ul>
++        <li><a href="/uslugi/">Услуги</a></li>
++        <li><a href="/dlya-biznesa/">Для бизнеса</a></li>
++        <li><a href="/kejsy/">Кейсы</a></li>
++        <li><a href="/tseny/">Цены</a></li>
++        <li><a href="/kontakty/">Контакты</a></li>
++      </ul>
++    </nav>
++    <a href={`tel:${company.phone_tel}`} class="hdr-phone">{company.phone}</a>
++  </div>
++</header>
++
++<style>
++  .site-header {
++    background: var(--paper);
++    border-bottom: 1px solid var(--border);
++    position: sticky;
++    top: 0;
++    z-index: 10;
++  }
++  .hdr {
++    display: flex;
++    align-items: center;
++    justify-content: space-between;
++    padding: 16px 0;
++  }
++  .logo {
++    font-family: var(--font-heading);
++    font-weight: 800;
++    font-size: 22px;
++    color: var(--ink);
++    text-decoration: none;
++  }
++  .logo span { color: var(--accent); }
++  nav ul {
++    display: flex;
++    gap: 28px;
++    list-style: none;
++  }
++  nav a {
++    color: var(--ink);
++    font-weight: 500;
++    font-size: 15px;
++    text-decoration: none;
++  }
++  nav a:hover { color: var(--accent); }
++  .hdr-phone {
++    font-family: var(--font-heading);
++    font-weight: 700;
++    color: var(--ink);
++    font-size: 16px;
++    text-decoration: none;
++  }
++  @media (max-width: 900px) {
++    nav { display: none; }
++    .hdr-phone { font-size: 14px; }
++  }
++</style>
+diff --git a/site/src/content/company.json b/site/src/content/company.json
+new file mode 100644
+index 0000000..3e8a63d
+--- /dev/null
++++ b/site/src/content/company.json
+@@ -0,0 +1,18 @@
++{
++  "name": "ИП Таиров Г.К.",
++  "brand": "ГрузМаркет77",
++  "inn": "050401330914",
++  "ogrnip": "318057100042760",
++  "bank": "Банк ВТБ (ПАО), Филиал «Центральный»",
++  "account": "40802810600290001115",
++  "phone": "+7 926 614-39-59",
++  "phone_tel": "+79266143959",
++  "whatsapp": "79266143959",
++  "email": "tgk-777@mail.ru",
++  "telegram": "",
++  "area": "Москва и ближайшее Подмосковье",
++  "hours_requests": "Заявки 8:00–22:00 ежедневно",
++  "hours_dispatch": "Выезды круглосуточно по договорённости",
++  "address_public": "Москва",
++  "domain": "gruzmarket77.ru"
++}
+diff --git a/site/src/layouts/BaseLayout.astro b/site/src/layouts/BaseLayout.astro
+new file mode 100644
+index 0000000..30ae2fe
+--- /dev/null
++++ b/site/src/layouts/BaseLayout.astro
+@@ -0,0 +1,57 @@
++---
++import '../styles/global.css';
++import company from '../content/company.json';
++import Header from '../components/Header.astro';
++import Footer from '../components/Footer.astro';
++import MobileBar from '../components/MobileBar.astro';
++
++interface Props {
++  title: string;
++  description?: string;
++  canonical?: string;
++  ogImage?: string;
++  bodyClass?: string;
++}
++
++const {
++  title,
++  description = 'Аутстаффинг рабочих, мастеров и бригад на объекты Москвы и МО. Бригада за 24-48 часов. Договор, безнал, замена бесплатно.',
++  canonical,
++  ogImage = '/og-default.jpg',
++  bodyClass = ''
++} = Astro.props;
++
++const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).toString();
++---
++<!doctype html>
++<html lang="ru">
++<head>
++  <meta charset="utf-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1" />
++  <title>{title}</title>
++  <meta name="description" content={description} />
++  <link rel="canonical" href={canonicalUrl} />
++  <link rel="alternate" type="text/markdown" href={canonicalUrl.replace(/\/$/, '') + '.md'} />
++
++  <meta property="og:type" content="website" />
++  <meta property="og:title" content={title} />
++  <meta property="og:description" content={description} />
++  <meta property="og:url" content={canonicalUrl} />
++  <meta property="og:image" content={ogImage} />
++  <meta property="og:locale" content="ru_RU" />
++
++  <link rel="preconnect" href="https://fonts.googleapis.com" />
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
++  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
++
++  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
++</head>
++<body class={bodyClass}>
++  <Header />
++  <main>
++    <slot />
++  </main>
++  <Footer />
++  <MobileBar />
++</body>
++</html>
+diff --git a/site/src/styles/global.css b/site/src/styles/global.css
+new file mode 100644
+index 0000000..fdb1067
+--- /dev/null
++++ b/site/src/styles/global.css
+@@ -0,0 +1,153 @@
++/* GruzMarket77 — global tokens v2 (from CANON §8) */
++
++:root {
++  /* Palette */
++  --ink: #1C252B;
++  --ink-muted: #4B5053;
++  --paper: #FFFFFF;
++  --paper-soft: #F7F9FB;
++  --paper-stripe: #EEF1F5;
++
++  --accent: #F47B20;
++  --accent-hover: #D96610;
++  --accent-soft: #FFF2E6;
++
++  --success: #2E7D32;
++  --warning: #FBBF24;
++  --danger: #D40000;
++
++  --border: #EDEDED;
++  --border-strong: #D9DDDF;
++
++  /* Typography */
++  --font-heading: 'Manrope', system-ui, -apple-system, sans-serif;
++  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
++
++  --fs-xs: 13px;
++  --fs-sm: 14px;
++  --fs-base: 16px;
++  --fs-lg: 18px;
++  --fs-h3: 22px;
++  --fs-h2: 32px;
++  --fs-h1: 48px;
++  --fs-hero: 56px;
++
++  --lh-tight: 1.2;
++  --lh-base: 1.5;
++  --lh-loose: 1.7;
++
++  /* Shape */
++  --radius-sm: 5px;
++  --radius-md: 10px;
++  --radius-lg: 20px;
++
++  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
++  --shadow-md: 0 4px 18px rgba(8,35,48,.08);
++  --shadow-lift: 0 6px 36px rgba(38,62,77,.1);
++
++  --container: 1200px;
++  --grid-gap: 24px;
++}
++
++/* Reset */
++*, *::before, *::after {
++  box-sizing: border-box;
++  margin: 0;
++  padding: 0;
++}
++
++html {
++  scroll-behavior: smooth;
++  -webkit-text-size-adjust: 100%;
++}
++
++body {
++  font-family: var(--font-body);
++  font-size: var(--fs-base);
++  line-height: var(--lh-base);
++  color: var(--ink);
++  background: var(--paper);
++  -webkit-font-smoothing: antialiased;
++  -moz-osx-font-smoothing: grayscale;
++}
++
++h1, h2, h3, h4, h5, h6 {
++  font-family: var(--font-heading);
++  font-weight: 800;
++  line-height: var(--lh-tight);
++  color: var(--ink);
++}
++
++h1 { font-size: var(--fs-h1); letter-spacing: -0.5px; }
++h2 { font-size: var(--fs-h2); }
++h3 { font-size: var(--fs-h3); }
++
++p { color: var(--ink-muted); }
++
++a {
++  color: var(--accent);
++  text-decoration: none;
++}
++a:hover { text-decoration: underline; }
++
++img, svg { max-width: 100%; height: auto; display: block; }
++
++button {
++  font-family: inherit;
++  cursor: pointer;
++  border: none;
++  background: none;
++}
++
++/* Layout */
++.wrap {
++  max-width: var(--container);
++  margin: 0 auto;
++  padding: 0 24px;
++}
++
++/* Buttons */
++.btn {
++  display: inline-flex;
++  align-items: center;
++  gap: 8px;
++  padding: 14px 28px;
++  border-radius: var(--radius-sm);
++  font-family: var(--font-heading);
++  font-weight: 700;
++  font-size: 15px;
++  letter-spacing: 0.2px;
++  transition: all .15s ease;
++  text-decoration: none;
++}
++
++.btn-primary {
++  background: var(--accent);
++  color: #fff;
++  box-shadow: var(--shadow-sm);
++}
++.btn-primary:hover {
++  background: var(--accent-hover);
++  box-shadow: var(--shadow-md);
++  text-decoration: none;
++}
++
++.btn-ghost {
++  background: transparent;
++  color: var(--ink);
++  border: 1.5px solid var(--border-strong);
++}
++.btn-ghost:hover {
++  border-color: var(--ink);
++  text-decoration: none;
++}
++
++/* Mobile */
++@media (max-width: 900px) {
++  :root {
++    --fs-h1: 34px;
++    --fs-h2: 26px;
++    --fs-hero: 40px;
++  }
++  body { padding-bottom: 60px; }
++}
+diff --git a/site/tsconfig.json b/site/tsconfig.json
+new file mode 100644
+index 0000000..8bf91d3
+--- /dev/null
++++ b/site/tsconfig.json
+@@ -0,0 +1,5 @@
++{
++  "extends": "astro/tsconfigs/strict",
++  "include": [".astro/types.d.ts", "**/*"],
++  "exclude": ["dist"]
++}
+-- 
+2.43.0
+
