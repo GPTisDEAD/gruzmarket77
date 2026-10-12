@@ -216,8 +216,25 @@ const trust = [
 
 <style>
   .hero {
-    background: var(--paper-soft);
+    position: relative;
     padding: 64px 0 80px;
+    background:
+      linear-gradient(100deg,
+        var(--paper-soft) 0%,
+        rgba(248, 249, 250, 0.96) 32%,
+        rgba(248, 249, 250, 0.78) 55%,
+        rgba(248, 249, 250, 0.35) 100%),
+      url('/img/hero.webp') right center / cover no-repeat;
+  }
+  @media (max-width: 900px) {
+    .hero {
+      background:
+        linear-gradient(180deg,
+          var(--paper-soft) 0%,
+          rgba(248, 249, 250, 0.92) 60%,
+          rgba(248, 249, 250, 0.6) 100%),
+        url('/img/hero.webp') center bottom / cover no-repeat;
+    }
   }
   .hero-grid {
     display: grid;

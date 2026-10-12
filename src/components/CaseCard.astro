@@ -10,10 +10,11 @@ interface Props {
 }
 const { slug, title, tag, duration, crew, total, gradient = 'linear-gradient(135deg,#1C252B,#3A4047)' } = Astro.props;
 const totalShort = total.split('(')[0].trim();
+const imageSrc = `/img/cases/${slug}-card.webp`;
 ---
 <article class="case-card">
   <a href={`/kejsy/${slug}/`} class="case-visual" style={`background:${gradient}`}>
-    <span>до → после</span>
+    <img src={imageSrc} alt={title} loading="lazy" width="640" height="320" />
   </a>
   <div class="case-body">
     <span class="case-tag">{tag}</span>
@@ -34,25 +35,21 @@ const totalShort = total.split('(')[0].trim();
   }
   .case-card:hover { box-shadow: var(--shadow-lift); transform: translateY(-3px); }
   .case-visual {
-    height: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 16px;
-    opacity: .9;
+    aspect-ratio: 2 / 1;
+    display: block;
     position: relative;
     overflow: hidden;
     text-decoration: none;
+    background-color: #1C252B;
   }
-  .case-visual::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(255,255,255,.03) 15px, rgba(255,255,255,.03) 30px);
+  .case-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .4s;
   }
+  .case-card:hover .case-visual img { transform: scale(1.04); }
   .case-body { padding: 20px; }
   .case-tag {
     display: inline-block;
