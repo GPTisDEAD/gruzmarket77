@@ -84,6 +84,15 @@ def sync_subscribers(state: dict) -> list[str]:
                 print(f"confirm failed for {cid}: {type(e).__name__}")
     state["subscribers"] = sorted(subs)
     print(f"subscribers: {len(subs)}")
+    # диагностика: кто эти чаты (маскированно — логи публичны)
+    for cid in sorted(subs):
+        try:
+            ch = tg_call("getChat", {"chat_id": cid}).get("result", {})
+            un = ch.get("username") or "-"
+            fn = ch.get("first_name") or "-"
+            print(f"who {cid}: username={un[:4]}… name={fn[:2]}…({len(fn)})")
+        except Exception as e:  # noqa: BLE001
+            print(f"who {cid}: getChat failed {type(e).__name__}")
     return sorted(subs)
 
 
