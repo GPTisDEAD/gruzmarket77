@@ -32,6 +32,13 @@ jobs:
           print("updates total:", len(ups))
           for cid, mask in seen.items():
               print(f"chat id: {cid}  name: {mask}")
+              req = urllib.request.Request(
+                  f"https://api.telegram.org/bot{tok}/sendMessage",
+                  data=json.dumps({"chat_id": cid,
+                      "text": "✅ Тест: вы подключены к боту лидов GruzMarket77. Ответьте Артёму, что получили."}).encode(),
+                  headers={"Content-Type": "application/json"})
+              urllib.request.urlopen(req, timeout=30)
+              print(f"test message sent to {cid}")
           if not seen:
               print("chat ids: никто ещё не написал боту /start")
           PY
