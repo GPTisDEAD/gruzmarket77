@@ -21,6 +21,17 @@ jobs:
           with urllib.request.urlopen(
               f"https://api.telegram.org/bot{tok}/getUpdates", timeout=30) as r:
               ups = json.loads(r.read()).get("result", [])
-          ids = {str(u["message"]["chat"]["id"]) for u in ups if "message" in u}
-          print("chat ids:", ", ".join(sorted(ids)) or "никто ещё не написал боту /start")
+          seen = {}
+          for u in ups:
+              m = u.get("message")
+              if not m:
+                  continue
+              cid = str(m["chat"]["id"])
+              name = (m["chat"].get("first_name") or "?")
+              seen[cid] = name[:1] + "*" * max(len(name) - 1, 1)
+          print("updates total:", len(ups))
+          for cid, mask in seen.items():
+              print(f"chat id: {cid}  name: {mask}")
+          if not seen:
+              print("chat ids: никто ещё не написал боту /start")
           PY
