@@ -1,7 +1,7 @@
-2026-10-21 22:37:42Z
-force upload: OK {}
-last report id=None status=success_warning finished_at=2026-10-21T22:37:27Z
-report summary: {"title": "Обработано объявлений", "slug": "sections_stats", "sections": [{"title": "Не удалось опубликовать", "slug": "error", "sections": [{"title": "Ошибки описания", "slug": "error_params", "count": 3}], "count": 3}], "count": 3}
-items: HTTP 400 — {"error":{"code":400,"message":"Request Error"}}
+2026-10-21 23:25:51Z
+existing reports: [(619929288, 'processing', '2026-10-21T23:02:36Z'), (619927939, 'success_warning', '2026-10-21T23:00:04Z'), (619920781, 'success_warning', '2026-10-21T22:37:27Z')]
+force upload: HTTP 429 — {"error":{"message":"В пределах одного часа можно запустить только одну автозагрузку. Вы уже сделали это. Можно повторить через 45 минут."}}
 
-ads ok: 0, ads with messages: 0
+fallback last_completed: id=None status=success_warning finished_at=2026-10-21T23:02:36Z
+report id=None summary: {"title": "Обработано объявлений", "slug": "sections_stats", "sections": [{"title": "Не удалось опубликовать", "slug": "error", "sections": [{"title": "Другие ошибки", "slug": "error_other", "count": 1}, {"title": "Ошибки описания", "slug": "error_params", "count": 3}], "count": 4}, {"title": "Опубликовано с проблемами", "slug": "publish_with_problems", "sections": [{"title": "Другие ошибки", "slug": "problem_other", "count": 3}], "count": 3}, {"title": "Успешно опубликовано", "slug": "successful", "sections": [{"title": "Добавлено", "slug": "success_added", "count": 31}], "count": 31}], "coun
+у отчёта нет id — постатейные ошибки недоступны этим путём
