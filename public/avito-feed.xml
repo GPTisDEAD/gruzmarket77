@@ -9,6 +9,8 @@
     <ServiceSubtype>Другое</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
+    <TeamSize>5-20 человек</TeamSize>
+    <MaterialPurchase>Возможна</MaterialPurchase>
     <Title>Демонтаж квартир, офисов, перегородок. С вывозом</Title>
     <Description><![CDATA[🔨 Демонтаж квартир и офисов с вывозом мусора — под ключ.
 
@@ -85,6 +87,9 @@
     <ServiceSubtype>Электрика</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
+    <Specialty><Option>Электромонтажные работы, тёплый пол</Option><Option>Ремонт электрики, освещение, слаботочные работы</Option></Specialty>
+    <TeamSize>2-4 человека</TeamSize>
+    <MaterialPurchase>Да</MaterialPurchase>
     <Title>Электрик на дом. Срочный выезд. Все работы с гарантией</Title>
     <Description><![CDATA[⚡ Электрик ГрузМаркет77 — работаем в Москве и МО с 2010 года.
 От срочного вызова до монтажа электрики в квартире под ключ.
@@ -146,6 +151,9 @@
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
     <ServiceSubtype>Грузчики</ServiceSubtype>
+    <Specialty><Option>Услуги грузчиков, складских работников</Option></Specialty>
+    <MoversQuantity>Больше 2</MoversQuantity>
+    <MinimumOrderTime>4</MinimumOrderTime>
     <Title>Грузчики в Москве. От 1 человека. Выезд за 2 часа</Title>
     <Description><![CDATA[🚚 Грузчики ГрузМаркет77 — работаем в Москве и МО с 2010 года.
 
@@ -282,6 +290,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Сад, благоустройство</ServiceType>
+    <ServiceSubtype>Озеленение, уход за садом и огородом</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Ландшафт под ключ. Газон, посадка, уход. Москва МО</Title>
     <Description><![CDATA[🌱 Ландшафт и благоустройство ГрузМаркет77 — Москва и МО с 2010 года.
 Для частных участков, УК, бизнес-центров, коттеджных посёлков.
@@ -437,6 +448,9 @@
     <ServiceSubtype>Ремонт квартир и домов под ключ</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
+    <ScopeOfWork><Option>Квартира целиком под ключ</Option><Option>Комнаты под ключ</Option><Option>Санузел под ключ</Option></ScopeOfWork>
+    <TeamSize>5-20 человек</TeamSize>
+    <MaterialPurchase>Возможна</MaterialPurchase>
     <Title>Ремонт квартир под ключ. Прораб, бригада, смета</Title>
     <Description><![CDATA[🏠 Ремонт квартир под ключ в Москве и МО — ГрузМаркет77 с 2010 года.
 От черновой до дизайнерского ремонта. Своя бригада, прораб на объекте.
@@ -511,6 +525,9 @@
     <ServiceSubtype>Плиточные работы</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
+    <TypesOfWork><Option>Укладка плитки</Option></TypesOfWork>
+    <TeamSize>2-4 человека</TeamSize>
+    <MaterialPurchase>Возможна</MaterialPurchase>
     <Title>Плиточник. Укладка плитки, керамогранита. Санузлы</Title>
     <Description><![CDATA[🧱 Плиточник ГрузМаркет77 — работаем в Москве и МО с 2010 года.
 Укладка плитки и керамогранита любого формата. Санузлы, кухни, полы, фасады.
@@ -580,6 +597,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Строительство</ServiceType>
+    <ServiceSubtype>Разнорабочие</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Разнорабочие на стройку. От 1 до 20 чел. Прораб</Title>
     <Description><![CDATA[👷 Разнорабочие ГрузМаркет77 — Москва и МО с 2010 года.
 Для прорабов, подрядчиков и застройщиков. От 1 до 20 человек в бригаде.
@@ -652,6 +672,9 @@
     <ServiceSubtype>Сантехника</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
+    <Specialty><Option>Установка, замена, ремонт сантехники и оборудования</Option><Option>Монтаж и ремонт систем водоснабжения, отопления, канализации</Option></Specialty>
+    <TeamSize>2-4 человека</TeamSize>
+    <MaterialPurchase>Да</MaterialPurchase>
     <Title>Сантехник на дом. Срочно 24/7. Течь, засор, замена</Title>
     <Description><![CDATA[🔧 Сантехник ГрузМаркет77 — круглосуточно по Москве и МО с 2010 года.
 Течь, засор, замена сантехники, монтаж в новой квартире.
@@ -715,6 +738,9 @@
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
     <ServiceSubtype>Грузчики</ServiceSubtype>
+    <Specialty><Option>Такелажные работы</Option></Specialty>
+    <MoversQuantity>Больше 2</MoversQuantity>
+    <MinimumOrderTime>2</MinimumOrderTime>
     <Title>Такелажники. Сейфы, пианино, станки. Все этажи</Title>
     <Description><![CDATA[📦 Такелажники ГрузМаркет77 — Москва и МО с 2010 года.
 Перенос и перевозка сложных и крупногабаритных грузов.
@@ -1022,6 +1048,11 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Вывоз мусора и вторсырья</ServiceType>
+    <SameDayPickup>Да</SameDayPickup>
+    <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <MinimumOrderAmount>4500</MinimumOrderAmount>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
     <Title>Вывоз мусора. Строй, старая мебель, хлам. Контейнер</Title>
     <Description><![CDATA[🗑️ Вывоз мусора ГрузМаркет77 — Москва и МО с 2010 года.
 Строительный мусор, старая мебель, хлам после переезда, крупногабарит.
@@ -1095,6 +1126,8 @@
     <ServiceSubtype>Другое</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
+    <TeamSize>5-20 человек</TeamSize>
+    <MaterialPurchase>Возможна</MaterialPurchase>
     <Title>Демонтаж квартиры в ЦАО — от 350 ₽/м²</Title>
     <Description><![CDATA[Бригада 3–5 человек, выезд за сутки. Снос стен, стяжки, демонтаж плитки, сантехкабин. Вывоз мусора. Работаем с прорабами и частными клиентами. Договор ИП, акты. 40 мастеров в штате. Назовите код САЙТ77 — скидка 3%.
 
@@ -1121,6 +1154,8 @@
     <ServiceSubtype>Другое</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
+    <TeamSize>5-20 человек</TeamSize>
+    <MaterialPurchase>Возможна</MaterialPurchase>
     <Title>Демонтаж в ЮАО Москвы — бригада за сутки</Title>
     <Description><![CDATA[Демонтаж квартир, офисов, перегородок от 350 ₽/м². Свой инструмент, вывоз мусора, уборка после работ. Для прорабов — договор субподряда, НДС не требуется. Код САЙТ77 — скидка 3%.
 
@@ -1147,6 +1182,8 @@
     <ServiceSubtype>Другое</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
+    <TeamSize>5-20 человек</TeamSize>
+    <MaterialPurchase>Возможна</MaterialPurchase>
     <Title>Демонтаж квартир и офисов — ЗАО</Title>
     <Description><![CDATA[Снос стен и перегородок, демонтаж полов, плитки, потолков от 350 ₽/м². Бригада с инструментом за сутки. Договор, акты. Код САЙТ77 — скидка 3%.
 
@@ -1173,6 +1210,8 @@
     <ServiceSubtype>Другое</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
+    <TeamSize>5-20 человек</TeamSize>
+    <MaterialPurchase>Возможна</MaterialPurchase>
     <Title>Демонтажные работы САО — от 350 ₽/м²</Title>
     <Description><![CDATA[Полный и частичный демонтаж под ремонт. Квартиры, офисы, коммерция. Вывоз мусора контейнером. Работаем по договору. Код САЙТ77 — скидка 3%.
 
@@ -1199,6 +1238,8 @@
     <ServiceSubtype>Другое</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
+    <TeamSize>5-20 человек</TeamSize>
+    <MaterialPurchase>Возможна</MaterialPurchase>
     <Title>Демонтаж под ремонт в ВАО</Title>
     <Description><![CDATA[Бригада на демонтаж от 350 ₽/м²: стены, стяжка, плитка, сантехкабины. Выезд на оценку бесплатно. Договор ИП, 40 мастеров. Код САЙТ77 — скидка 3%.
 
@@ -1223,6 +1264,9 @@
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
     <ServiceSubtype>Грузчики</ServiceSubtype>
+    <Specialty><Option>Услуги грузчиков, складских работников</Option></Specialty>
+    <MoversQuantity>Больше 2</MoversQuantity>
+    <MinimumOrderTime>4</MinimumOrderTime>
     <Title>Грузчики на объект ЦАО — от 650 ₽/час</Title>
     <Description><![CDATA[Грузчики и разнорабочие для бизнеса: склады, стройки, ТРЦ, ивенты. Выезд за 2 часа, от 1 до 20 человек. Договор ИП, безнал, акты. Код САЙТ77 — скидка 3%.
 
@@ -1247,6 +1291,9 @@
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
     <ServiceSubtype>Грузчики</ServiceSubtype>
+    <Specialty><Option>Услуги грузчиков, складских работников</Option></Specialty>
+    <MoversQuantity>Больше 2</MoversQuantity>
+    <MinimumOrderTime>4</MinimumOrderTime>
     <Title>Грузчики и хелперы ЮАО — за 2 часа на месте</Title>
     <Description><![CDATA[40 человек в штате. Погрузка-разгрузка, переезды офисов, такелаж. Для юрлиц — договор, безнал. От 650 ₽/час. Код САЙТ77 — скидка 3%.
 
@@ -1271,6 +1318,9 @@
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
     <ServiceSubtype>Грузчики</ServiceSubtype>
+    <Specialty><Option>Услуги грузчиков, складских работников</Option></Specialty>
+    <MoversQuantity>Больше 2</MoversQuantity>
+    <MinimumOrderTime>4</MinimumOrderTime>
     <Title>Грузчики для бизнеса ЗАО — от 650 ₽/час</Title>
     <Description><![CDATA[Разнорабочие и грузчики на склад, стройку, мероприятие. Разово или по графику. Бригадир на объекте. Договор, акты. Код САЙТ77 — скидка 3%.
 
@@ -1295,6 +1345,9 @@
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
     <ServiceSubtype>Грузчики</ServiceSubtype>
+    <Specialty><Option>Услуги грузчиков, складских работников</Option></Specialty>
+    <MoversQuantity>Больше 2</MoversQuantity>
+    <MinimumOrderTime>4</MinimumOrderTime>
     <Title>Разнорабочие на объект — САО</Title>
     <Description><![CDATA[Грузчики, хелперы, подсобники от 650 ₽/час. Выезд в день заявки. Для прорабов и УК — работа по договору. Код САЙТ77 — скидка 3%.
 
@@ -1319,6 +1372,9 @@
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
     <ServiceSubtype>Грузчики</ServiceSubtype>
+    <Specialty><Option>Услуги грузчиков, складских работников</Option></Specialty>
+    <MoversQuantity>Больше 2</MoversQuantity>
+    <MinimumOrderTime>4</MinimumOrderTime>
     <Title>Грузчики ВАО — выезд за 2 часа</Title>
     <Description><![CDATA[Бригада грузчиков для складов, строек, переездов. От 650 ₽/час, мин. заказ 4 часа. Юрлицам — безнал и акты. Код САЙТ77 — скидка 3%.
 
@@ -1566,6 +1622,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Строительство</ServiceType>
+    <ServiceSubtype>Разнорабочие</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Аутстаффинг рабочих в Москве — бригада за сутки</Title>
     <Description><![CDATA[Поставка рабочих и мастеров на объекты: демонтаж, отделка, клининг, грузчики. 40 мастеров в штате, бригада от 3 человек за сутки. Для прорабов, УК, клининговых компаний. Договор ИП, акты. Код САЙТ77 — скидка 3%.
 
@@ -1586,6 +1645,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Строительство</ServiceType>
+    <ServiceSubtype>Разнорабочие</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Рабочие на объект под ключ — ЮАО</Title>
     <Description><![CDATA[Подсобники, отделочники, электрики, грузчики — любой профиль за сутки. Для прорабов и застройщиков. Работа по договору субподряда. Код САЙТ77 — скидка 3%.
 
@@ -1606,6 +1668,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Строительство</ServiceType>
+    <ServiceSubtype>Разнорабочие</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Бригада на подряд ВАО — 40 мастеров</Title>
     <Description><![CDATA[Аутстаффинг: демонтаж, монолит, отделка, клининг. Выезд в день заявки, бригадир на объекте. Договор, акты, безнал. Код САЙТ77 — скидка 3%.
 
