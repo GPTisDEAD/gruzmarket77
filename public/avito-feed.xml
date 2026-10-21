@@ -90,7 +90,7 @@
     <ServiceSubtype>Электрика</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
-    <Specialty><Option>Электромонтажные работы, тёплый пол</Option><Option>Ремонт электрики, освещение, слаботочные работы</Option></Specialty>
+    <Specialty>Электромонтажные работы, тёплый пол</Specialty>
     <TeamSize>2-4 человека</TeamSize>
     <MaterialPurchase>Да</MaterialPurchase>
     <Title>Электрик на дом. Срочный выезд. Все работы с гарантией</Title>
@@ -301,6 +301,9 @@
     <ServiceSubtype>Озеленение, уход за садом и огородом</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
+    <Specialty>Уход за участком, растениями, посадка деревьев и услуги садовника</Specialty>
+    <TeamSize>2-4 человека</TeamSize>
+    <MaterialPurchase>Да</MaterialPurchase>
     <Title>Ландшафт под ключ. Газон, посадка, уход. Москва МО</Title>
     <Description><![CDATA[🌱 Ландшафт и благоустройство ГрузМаркет77 — Москва и МО с 2010 года.
 Для частных участков, УК, бизнес-центров, коттеджных посёлков.
@@ -683,7 +686,7 @@
     <ServiceSubtype>Сантехника</ServiceSubtype>
     <WorkExperience>10 лет и больше</WorkExperience>
     <Guarantee>Да</Guarantee>
-    <Specialty><Option>Установка, замена, ремонт сантехники и оборудования</Option><Option>Монтаж и ремонт систем водоснабжения, отопления, канализации</Option></Specialty>
+    <Specialty>Установка, замена, ремонт сантехники и оборудования</Specialty>
     <TeamSize>2-4 человека</TeamSize>
     <MaterialPurchase>Да</MaterialPurchase>
     <Title>Сантехник на дом. Срочно 24/7. Течь, засор, замена</Title>
