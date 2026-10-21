@@ -55,4 +55,9 @@ jobs:
           git config user.name "gm77-bot"
           git config user.email "bot@gruzmarket77.ru"
           git add avito-bot/diag.log || true
-          git diff --cached --quiet || { git commit -m "bot diag [skip ci]" && git push origin HEAD:main; }
+          git diff --cached --quiet || {
+            git commit -m "bot diag [skip ci]"
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort; exit 0; }
+            git push origin HEAD:main || true
+          }

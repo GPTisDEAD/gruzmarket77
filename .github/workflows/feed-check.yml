@@ -42,4 +42,9 @@ jobs:
           git config user.name "gm77-bot"
           git config user.email "bot@gruzmarket77.ru"
           git add avito-bot/feed-report.txt || true
-          git diff --cached --quiet || { git commit -m "feed report [skip ci]" && git push origin HEAD:main; }
+          git diff --cached --quiet || {
+            git commit -m "feed report [skip ci]"
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort; git push -f origin HEAD:refs/heads/feed-reports; exit 0; }
+            git push origin HEAD:main
+          }
