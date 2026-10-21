@@ -55,6 +55,19 @@ def main() -> None:
     auth = {"Authorization": f"Bearer {tok}"}
     start = int(time.time())
 
+    # 0) какие отчёты уже есть (чтобы отличить свежий от старых)
+    def reports_list():
+        try:
+            r = http(f"{API}/autoload/v2/reports?per_page=5&page=0", headers=auth)
+            return r.get("reports") or r.get("items") or []
+        except urllib.error.HTTPError as e:
+            log(f"reports list: HTTP {e.code} — {e.read().decode()[:200]}")
+            return []
+
+    before = reports_list()
+    known = {r.get("id") for r in before}
+    log(f"existing reports: {[(r.get('id'), r.get('status'), r.get('started_at')) for r in before[:3]]}")
+
     # 1) форсировать выгрузку
     try:
         r = http(f"{API}/autoload/v1/upload", data={}, headers=auth, method="POST")
@@ -62,33 +75,31 @@ def main() -> None:
     except urllib.error.HTTPError as e:
         log(f"force upload: HTTP {e.code} — {e.read().decode()[:300]}")
 
-    # 2) ждать свежий завершённый отчёт (до 10 минут)
+    # 2) ждать НОВЫЙ завершённый отчёт (до ~11 минут)
     report = None
-    for _ in range(40):
+    for _ in range(45):
         time.sleep(15)
-        try:
-            rep = http(f"{API}/autoload/v2/reports/last_completed_report", headers=auth)
-        except urllib.error.HTTPError as e:
-            log(f"report poll: HTTP {e.code} — {e.read().decode()[:200]}")
-            break
-        fin = rep.get("finished_at") or ""
-        log(f"last report id={rep.get('id')} status={rep.get('status')} finished_at={fin}")
-        # finished_at — ISO; свежий = завершён после нашего запуска
-        try:
-            fin_ts = time.mktime(time.strptime(fin[:19], "%Y-%m-%dT%H:%M:%S"))
-        except (ValueError, TypeError):
-            fin_ts = 0
-        if fin_ts >= start - 3600 * 3:  # с запасом на таймзоны
-            report = rep
-            if fin_ts >= start - 120:
+        reps = reports_list()
+        fresh = [r for r in reps if r.get("id") not in known]
+        if fresh:
+            cand = fresh[0]
+            st = (cand.get("status") or "").lower()
+            log(f"new report id={cand.get('id')} status={st}")
+            if st and not st.startswith(("processing", "created", "pending", "in_progress")):
+                report = cand
                 break
     if not report:
-        log("отчёт не получен — смотреть в кабинете")
-        return
+        # фолбэк: последний завершённый
+        report = http(f"{API}/autoload/v2/reports/last_completed_report", headers=auth)
+        log(f"fallback last_completed: id={report.get('id')} status={report.get('status')}"
+            f" finished_at={report.get('finished_at')}")
 
     rid = report.get("id")
     s = report.get("section_stats") or report.get("statistics") or {}
-    log(f"report summary: {json.dumps(s, ensure_ascii=False)[:500]}")
+    log(f"report id={rid} summary: {json.dumps(s, ensure_ascii=False)[:600]}")
+    if rid is None:
+        log("у отчёта нет id — постатейные ошибки недоступны этим путём")
+        return
 
     # 3) постатейные статусы/ошибки
     errs, ok_count = [], 0
@@ -127,8 +138,10 @@ def main() -> None:
             subs = json.load(f).get("subscribers", [])
     except (FileNotFoundError, json.JSONDecodeError):
         subs = []
-    summary = (f"📦 Авито обработал фид\nБез замечаний: {ok_count}\n"
-               f"С замечаниями: {len(errs)}")
+    top = "; ".join(f"{sec.get('title')}: {sec.get('count')}"
+                    for sec in (s.get("sections") or []) if isinstance(sec, dict))
+    summary = (f"📦 Авито обработал фид\nВсего обработано: {s.get('count', '?')}\n"
+               f"{top}\nБез замечаний: {ok_count}, с замечаниями: {len(errs)}")
     if errs:
         summary += "\n\nПервые ошибки:\n" + "\n".join("• " + e[:120] for e in errs[:7])
     for cid in subs:
