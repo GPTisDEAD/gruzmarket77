@@ -27,6 +27,12 @@ import urllib.parse
 import urllib.request
 
 AVITO_USER_ID = 449315472          # ID аккаунта GruzMarket77 на Авито
+DIAG_LINES: list[str] = []         # копия диагностики → avito-bot/diag.log (коммитится)
+
+
+def diag(line: str) -> None:
+    print(line)
+    DIAG_LINES.append(line)
 STATE_FILE = os.environ.get("STATE_FILE", "state.json")
 FRESH_WINDOW = 2 * 3600            # без state берём сообщения за последние 2 часа
 API = "https://api.avito.ru"
@@ -79,20 +85,20 @@ def sync_subscribers(state: dict) -> list[str]:
                     "text": "✅ Вы подключены к лидам GruzMarket77 с Авито. "
                             "Новые сообщения покупателей будут приходить сюда.",
                 })
-                print(f"new subscriber confirmed: {cid}")
+                diag(f"new subscriber confirmed: {cid}")
             except Exception as e:  # noqa: BLE001
-                print(f"confirm failed for {cid}: {type(e).__name__}")
+                diag(f"confirm failed for {cid}: {type(e).__name__}")
     state["subscribers"] = sorted(subs)
-    print(f"subscribers: {len(subs)}")
-    # диагностика: кто эти чаты (маскированно — логи публичны)
+    diag(f"subscribers: {len(subs)}")
+    # диагностика: кто эти чаты (маскированно — логи и репа публичны)
     for cid in sorted(subs):
         try:
             ch = tg_call("getChat", {"chat_id": cid}).get("result", {})
             un = ch.get("username") or "-"
             fn = ch.get("first_name") or "-"
-            print(f"who {cid}: username={un[:4]}… name={fn[:2]}…({len(fn)})")
+            diag(f"who {cid}: username={un[:4]}… name={fn[:2]}…({len(fn)})")
         except Exception as e:  # noqa: BLE001
-            print(f"who {cid}: getChat failed {type(e).__name__}")
+            diag(f"who {cid}: getChat failed {type(e).__name__}")
     return sorted(subs)
 
 
@@ -178,7 +184,13 @@ def main() -> None:
         state["chats"] = dict(sorted(chats_state.items(), key=lambda kv: kv[1])[-200:])
     with open(STATE_FILE, "w", encoding="utf-8") as f:
         json.dump(state, f)
-    print(f"leads sent: {sent}")
+    diag(f"unread avito chats: {len(chats)}; leads sent: {sent}")
+    try:
+        with open("avito-bot/diag.log", "w", encoding="utf-8") as f:
+            f.write(time.strftime("%Y-%m-%d %H:%M:%SZ", time.gmtime()) + "\n"
+                    + "\n".join(DIAG_LINES) + "\n")
+    except OSError:
+        pass
 
 
 if __name__ == "__main__":

@@ -15,7 +15,8 @@ concurrency:
   group: avito-leads
   cancel-in-progress: false
 
-permissions: {}
+permissions:
+  contents: write
 
 jobs:
   poll:
@@ -47,3 +48,11 @@ jobs:
         with:
           path: state.json
           key: avito-leads-state-${{ github.run_id }}
+
+      - name: Commit diag report
+        if: always()
+        run: |
+          git config user.name "gm77-bot"
+          git config user.email "bot@gruzmarket77.ru"
+          git add avito-bot/diag.log || true
+          git diff --cached --quiet || { git commit -m "bot diag [skip ci]" && git push; }
