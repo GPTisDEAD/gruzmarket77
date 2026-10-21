@@ -5,8 +5,7 @@
     <Id>gm77-anchor-demontazh</Id>
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
-    <ServiceType>Ремонт и строительство</ServiceType>
-    <ServiceSubtype>Демонтаж построек, сооружений</ServiceSubtype>
+    <ServiceType>Ремонт и отделка</ServiceType>
     <Title>Демонтаж квартир, офисов, перегородок. С вывозом</Title>
     <Description><![CDATA[🔨 Демонтаж квартир и офисов с вывозом мусора — под ключ.
 
@@ -78,8 +77,7 @@
     <Id>gm77-anchor-gruzchiki</Id>
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
-    <ServiceType>Грузоперевозки</ServiceType>
-    <ServiceSubtype>Грузчики</ServiceSubtype>
+    <ServiceType>Грузчики, складские услуги</ServiceType>
     <Title>Грузчики в Москве. От 1 человека. Выезд за 2 часа</Title>
     <Description><![CDATA[🚚 Грузчики ГрузМаркет77 — работаем в Москве и МО с 2010 года.
 
@@ -136,7 +134,13 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Уборка</ServiceType>
-    <ServiceSubtype>Уборка после ремонта</ServiceSubtype>
+    <ServiceSubtype>Генеральная уборка</ServiceSubtype>
+    <SameDayPickup>Да</SameDayPickup>
+    <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
+    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <MinimumOrderAmount>12000</MinimumOrderAmount>
+    <CleaningProducts>Есть свои</CleaningProducts>
     <Title>Уборка после ремонта и строителей. Выезд сегодня</Title>
     <Description><![CDATA[✨ Профессиональная уборка после ремонта и строителей.
 
