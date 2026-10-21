@@ -1,0 +1,45 @@
+# Принудительная проверка фида Авито: форс-выгрузка + отчёт в Telegram и в репу.
+name: feed-check
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "avito-bot/feed-ping"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: feed-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: avito-bot
+
+      - name: Restore bot state (subscribers)
+        uses: actions/cache/restore@v4
+        with:
+          path: state.json
+          restore-keys: avito-leads-state-
+          key: avito-leads-state-none
+
+      - name: Force upload + report
+        env:
+          AVITO_CLIENT_ID: ${{ secrets.AVITO_CLIENT_ID }}
+          AVITO_CLIENT_SECRET: ${{ secrets.AVITO_CLIENT_SECRET }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+        run: python3 avito-bot/check_feed.py
+
+      - name: Commit report
+        if: always()
+        run: |
+          git config user.name "gm77-bot"
+          git config user.email "bot@gruzmarket77.ru"
+          git add avito-bot/feed-report.txt || true
+          git diff --cached --quiet || { git commit -m "feed report [skip ci]" && git push origin HEAD:main; }
