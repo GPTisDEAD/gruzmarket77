@@ -1,0 +1,26 @@
+# Разовая утилита: показать chat_id всех, кто написал боту /start.
+# Запуск руками: Actions → tg-setup → Run workflow. Печатает ТОЛЬКО числовые id.
+name: tg-setup
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  chat-ids:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Get chat ids
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+          tok = os.environ["TG_BOT_TOKEN"]
+          with urllib.request.urlopen(
+              f"https://api.telegram.org/bot{tok}/getUpdates", timeout=30) as r:
+              ups = json.loads(r.read()).get("result", [])
+          ids = {str(u["message"]["chat"]["id"]) for u in ups if "message" in u}
+          print("chat ids:", ", ".join(sorted(ids)) or "никто ещё не написал боту /start")
+          PY

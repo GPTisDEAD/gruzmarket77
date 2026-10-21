@@ -1,0 +1,45 @@
+# Бот лидов Авито → Telegram. Поллинг каждые ~5 минут.
+# Секреты (Settings → Secrets → Actions): AVITO_CLIENT_ID, AVITO_CLIENT_SECRET,
+# TG_BOT_TOKEN, TG_CHAT_IDS. Логи публичны — контент переписки в них не попадает.
+name: avito-leads
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: avito-leads
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: avito-bot
+
+      - name: Restore state
+        uses: actions/cache/restore@v4
+        with:
+          path: state.json
+          key: avito-leads-state-${{ github.run_id }}
+          restore-keys: avito-leads-state-
+
+      - name: Poll Avito → Telegram
+        env:
+          AVITO_CLIENT_ID: ${{ secrets.AVITO_CLIENT_ID }}
+          AVITO_CLIENT_SECRET: ${{ secrets.AVITO_CLIENT_SECRET }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_IDS: ${{ secrets.TG_CHAT_IDS }}
+        run: python3 avito-bot/poll.py
+
+      - name: Save state
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: state.json
+          key: avito-leads-state-${{ github.run_id }}
