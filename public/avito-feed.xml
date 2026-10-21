@@ -6,6 +6,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Ремонт и отделка</ServiceType>
+    <ServiceSubtype>Другое</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Демонтаж квартир, офисов, перегородок. С вывозом</Title>
     <Description><![CDATA[🔨 Демонтаж квартир и офисов с вывозом мусора — под ключ.
 
@@ -79,6 +82,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Ремонт и отделка</ServiceType>
+    <ServiceSubtype>Электрика</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Электрик на дом. Срочный выезд. Все работы с гарантией</Title>
     <Description><![CDATA[⚡ Электрик ГрузМаркет77 — работаем в Москве и МО с 2010 года.
 От срочного вызова до монтажа электрики в квартире под ключ.
@@ -139,6 +145,7 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
+    <ServiceSubtype>Грузчики</ServiceSubtype>
     <Title>Грузчики в Москве. От 1 человека. Выезд за 2 часа</Title>
     <Description><![CDATA[🚚 Грузчики ГрузМаркет77 — работаем в Москве и МО с 2010 года.
 
@@ -198,10 +205,12 @@
     <ServiceSubtype>Простая уборка</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <Title>Клининг офисов. Абонентское обслуживание. Договор</Title>
     <Description><![CDATA[🧹 Абонентский клининг офисов — ГрузМаркет77, Москва и МО с 2010 года.
 Для бизнес-центров, open-space, кол-центров, медцентров, салонов.
@@ -348,10 +357,12 @@
     <ServiceSubtype>Мойка окон</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>3000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>3000</MinimumOrderAmount>
     <Title>Мойка окон и фасадов. Промальп. Квартиры, БЦ</Title>
     <Description><![CDATA[🪟 Мойка окон и фасадов ГрузМаркет77 — Москва и МО с 2010 года.
 От квартирного окна до фасада БЦ. Своя бригада промальпов с допуском.
@@ -423,6 +434,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Ремонт и отделка</ServiceType>
+    <ServiceSubtype>Ремонт квартир и домов под ключ</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Ремонт квартир под ключ. Прораб, бригада, смета</Title>
     <Description><![CDATA[🏠 Ремонт квартир под ключ в Москве и МО — ГрузМаркет77 с 2010 года.
 От черновой до дизайнерского ремонта. Своя бригада, прораб на объекте.
@@ -494,6 +508,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Ремонт и отделка</ServiceType>
+    <ServiceSubtype>Плиточные работы</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Плиточник. Укладка плитки, керамогранита. Санузлы</Title>
     <Description><![CDATA[🧱 Плиточник ГрузМаркет77 — работаем в Москве и МО с 2010 года.
 Укладка плитки и керамогранита любого формата. Санузлы, кухни, полы, фасады.
@@ -632,6 +649,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Ремонт и отделка</ServiceType>
+    <ServiceSubtype>Сантехника</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Сантехник на дом. Срочно 24/7. Течь, засор, замена</Title>
     <Description><![CDATA[🔧 Сантехник ГрузМаркет77 — круглосуточно по Москве и МО с 2010 года.
 Течь, засор, замена сантехники, монтаж в новой квартире.
@@ -694,6 +714,7 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
+    <ServiceSubtype>Грузчики</ServiceSubtype>
     <Title>Такелажники. Сейфы, пианино, станки. Все этажи</Title>
     <Description><![CDATA[📦 Такелажники ГрузМаркет77 — Москва и МО с 2010 года.
 Перенос и перевозка сложных и крупногабаритных грузов.
@@ -771,10 +792,12 @@
     <ServiceSubtype>Простая уборка</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>1800</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>1800</MinimumOrderAmount>
     <Title>Уборка подъездов и территории. УК, ТСЖ. Договор</Title>
     <Description><![CDATA[🍂 Уборка подъездов, территории и мусорных площадок — ГрузМаркет77.
 Для управляющих компаний, ТСЖ, ЖСК и собственников Москвы и МО с 2010 года.
@@ -847,10 +870,12 @@
     <ServiceSubtype>Генеральная уборка</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <Title>Уборка после ремонта и строителей. Выезд сегодня</Title>
     <Description><![CDATA[✨ Профессиональная уборка после ремонта и строителей.
 
@@ -920,10 +945,12 @@
     <ServiceSubtype>Простая уборка</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>5000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка территории</Option></Specialty>
+    <RoomType><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>5000</MinimumOrderAmount>
     <Title>Уборка снега. Абонентская + разовая. Парковки, УК</Title>
     <Description><![CDATA[❄️ Уборка снега ГрузМаркет77 — Москва и МО с 2010 года.
 Для УК, ТСЖ, ТЦ, бизнес-центров, парковок, логистических комплексов.
@@ -1065,6 +1092,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Ремонт и отделка</ServiceType>
+    <ServiceSubtype>Другое</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Демонтаж квартиры в ЦАО — от 350 ₽/м²</Title>
     <Description><![CDATA[Бригада 3–5 человек, выезд за сутки. Снос стен, стяжки, демонтаж плитки, сантехкабин. Вывоз мусора. Работаем с прорабами и частными клиентами. Договор ИП, акты. 40 мастеров в штате. Назовите код САЙТ77 — скидка 3%.
 
@@ -1088,6 +1118,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Ремонт и отделка</ServiceType>
+    <ServiceSubtype>Другое</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Демонтаж в ЮАО Москвы — бригада за сутки</Title>
     <Description><![CDATA[Демонтаж квартир, офисов, перегородок от 350 ₽/м². Свой инструмент, вывоз мусора, уборка после работ. Для прорабов — договор субподряда, НДС не требуется. Код САЙТ77 — скидка 3%.
 
@@ -1111,6 +1144,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Ремонт и отделка</ServiceType>
+    <ServiceSubtype>Другое</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Демонтаж квартир и офисов — ЗАО</Title>
     <Description><![CDATA[Снос стен и перегородок, демонтаж полов, плитки, потолков от 350 ₽/м². Бригада с инструментом за сутки. Договор, акты. Код САЙТ77 — скидка 3%.
 
@@ -1134,6 +1170,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Ремонт и отделка</ServiceType>
+    <ServiceSubtype>Другое</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Демонтажные работы САО — от 350 ₽/м²</Title>
     <Description><![CDATA[Полный и частичный демонтаж под ремонт. Квартиры, офисы, коммерция. Вывоз мусора контейнером. Работаем по договору. Код САЙТ77 — скидка 3%.
 
@@ -1157,6 +1196,9 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Ремонт и отделка</ServiceType>
+    <ServiceSubtype>Другое</ServiceSubtype>
+    <WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Да</Guarantee>
     <Title>Демонтаж под ремонт в ВАО</Title>
     <Description><![CDATA[Бригада на демонтаж от 350 ₽/м²: стены, стяжка, плитка, сантехкабины. Выезд на оценку бесплатно. Договор ИП, 40 мастеров. Код САЙТ77 — скидка 3%.
 
@@ -1180,6 +1222,7 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
+    <ServiceSubtype>Грузчики</ServiceSubtype>
     <Title>Грузчики на объект ЦАО — от 650 ₽/час</Title>
     <Description><![CDATA[Грузчики и разнорабочие для бизнеса: склады, стройки, ТРЦ, ивенты. Выезд за 2 часа, от 1 до 20 человек. Договор ИП, безнал, акты. Код САЙТ77 — скидка 3%.
 
@@ -1203,6 +1246,7 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
+    <ServiceSubtype>Грузчики</ServiceSubtype>
     <Title>Грузчики и хелперы ЮАО — за 2 часа на месте</Title>
     <Description><![CDATA[40 человек в штате. Погрузка-разгрузка, переезды офисов, такелаж. Для юрлиц — договор, безнал. От 650 ₽/час. Код САЙТ77 — скидка 3%.
 
@@ -1226,6 +1270,7 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
+    <ServiceSubtype>Грузчики</ServiceSubtype>
     <Title>Грузчики для бизнеса ЗАО — от 650 ₽/час</Title>
     <Description><![CDATA[Разнорабочие и грузчики на склад, стройку, мероприятие. Разово или по графику. Бригадир на объекте. Договор, акты. Код САЙТ77 — скидка 3%.
 
@@ -1249,6 +1294,7 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
+    <ServiceSubtype>Грузчики</ServiceSubtype>
     <Title>Разнорабочие на объект — САО</Title>
     <Description><![CDATA[Грузчики, хелперы, подсобники от 650 ₽/час. Выезд в день заявки. Для прорабов и УК — работа по договору. Код САЙТ77 — скидка 3%.
 
@@ -1272,6 +1318,7 @@
     <AdStatus>Free</AdStatus>
     <Category>Предложение услуг</Category>
     <ServiceType>Грузчики, складские услуги</ServiceType>
+    <ServiceSubtype>Грузчики</ServiceSubtype>
     <Title>Грузчики ВАО — выезд за 2 часа</Title>
     <Description><![CDATA[Бригада грузчиков для складов, строек, переездов. От 650 ₽/час, мин. заказ 4 часа. Юрлицам — безнал и акты. Код САЙТ77 — скидка 3%.
 
@@ -1298,10 +1345,12 @@
     <ServiceSubtype>Генеральная уборка</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <Title>Уборка после ремонта ЦАО — от 180 ₽/м²</Title>
     <Description><![CDATA[Строительная пыль, разводы, цемент — сдаём объект чистым. Бригада с профхимией и пылесосами. Квартиры, офисы, коммерция. Для прорабов — договор. Код САЙТ77 — скидка 3%.
 
@@ -1324,10 +1373,12 @@
     <ServiceSubtype>Генеральная уборка</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <Title>Клининг после стройки ЮАО</Title>
     <Description><![CDATA[Уборка после ремонта и строительства от 180 ₽/м². Профессиональная химия, выезд за сутки. Договор, акты для юрлиц. Код САЙТ77 — скидка 3%.
 
@@ -1350,10 +1401,12 @@
     <ServiceSubtype>Генеральная уборка</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <Title>Уборка после ремонта — ЗАО Москвы</Title>
     <Description><![CDATA[Послестроительная уборка квартир и офисов от 180 ₽/м². Бригада за сутки, своя химия и инвентарь. Код САЙТ77 — скидка 3%.
 
@@ -1376,10 +1429,12 @@
     <ServiceSubtype>Генеральная уборка</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <Title>Послестроительный клининг САО</Title>
     <Description><![CDATA[Уборка после ремонта от 180 ₽/м²: пыль, цемент, разводы, окна. Для прорабов — сдача объекта под ключ. Договор ИП. Код САЙТ77 — скидка 3%.
 
@@ -1402,10 +1457,12 @@
     <ServiceSubtype>Генеральная уборка</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <Title>Уборка после ремонта в ВАО за сутки</Title>
     <Description><![CDATA[Бригада клинеров с профхимией от 180 ₽/м². Квартиры, офисы, ТЦ. Юрлицам — договор и акты. Код САЙТ77 — скидка 3%.
 
@@ -1428,10 +1485,12 @@
     <ServiceSubtype>Простая уборка</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <Title>Клининг офисов ЦАО — от 12000 ₽/мес</Title>
     <Description><![CDATA[Ежедневная или еженедельная уборка офисов по договору. Свой персонал, химия, инвентарь. Замена без простоя. Безнал, акты. Код САЙТ77 — скидка 3%.
 
@@ -1454,10 +1513,12 @@
     <ServiceSubtype>Простая уборка</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <Title>Уборка офисов по договору — САО</Title>
     <Description><![CDATA[Клининг для бизнеса от 12000 ₽/мес: офисы, БЦ, коворкинги. График под вас, фикс-прайс. Договор ИП, безнал. Код САЙТ77 — скидка 3%.
 
@@ -1480,10 +1541,12 @@
     <ServiceSubtype>Простая уборка</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>12000</MinimumOrderAmount>
     <Title>Клининговая компания для бизнеса ЗАО</Title>
     <Description><![CDATA[Уборка офисов и БЦ от 12000 ₽/мес. Персонал в штате, замена без простоя, акты. Код САЙТ77 — скидка 3%.
 
@@ -1566,10 +1629,12 @@
     <ServiceSubtype>Мойка окон</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>3000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>3000</MinimumOrderAmount>
     <Title>Мытьё окон и витрин ЦАО — от 450 ₽</Title>
     <Description><![CDATA[Окна, витрины, фасадное остекление без разводов. Офисы, ТРЦ, квартиры. Промальп — по запросу. Договор для юрлиц. Код САЙТ77 — скидка 3%.
 
@@ -1594,10 +1659,12 @@
     <ServiceSubtype>Мойка окон</ServiceSubtype>
     <SameDayPickup>Да</SameDayPickup>
     <PerformersOnTheTeam>2–5</PerformersOnTheTeam>
-    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
     <WorkExperience>10 лет и больше</WorkExperience>
-    <MinimumOrderAmount>3000</MinimumOrderAmount>
     <CleaningProducts>Есть свои</CleaningProducts>
+    <WorkWithLegalEntities>Да</WorkWithLegalEntities>
+    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
+    <MinimumOrderAmount>3000</MinimumOrderAmount>
     <Title>Мытьё витрин и окон для бизнеса — ЗАО</Title>
     <Description><![CDATA[Витрины ТЦ, офисное остекление от 450 ₽/окно. График под вас, акты работ. Код САЙТ77 — скидка 3%.
 
