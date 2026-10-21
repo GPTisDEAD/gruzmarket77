@@ -97,12 +97,11 @@ def main() -> None:
     rid = report.get("id")
     s = report.get("section_stats") or report.get("statistics") or {}
     log(f"report id={rid} summary: {json.dumps(s, ensure_ascii=False)[:600]}")
-    if rid is None:
-        log("у отчёта нет id — постатейные ошибки недоступны этим путём")
-        return
 
     # 3) постатейные статусы/ошибки
     errs, ok_count = [], 0
+    if rid is None:
+        log("у отчёта нет id — постатейные ошибки пропущены")
     try:
         page = 0
         while True:
