@@ -6,6 +6,10 @@ on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
+  push:
+    paths:
+      - "avito-bot/**"
+      - ".github/workflows/avito-leads.yml"
 
 concurrency:
   group: avito-leads
