@@ -1,0 +1,7 @@
+2026-10-21 22:37:42Z
+force upload: OK {}
+last report id=None status=success_warning finished_at=2026-10-21T22:37:27Z
+report summary: {"title": "Обработано объявлений", "slug": "sections_stats", "sections": [{"title": "Не удалось опубликовать", "slug": "error", "sections": [{"title": "Ошибки описания", "slug": "error_params", "count": 3}], "count": 3}], "count": 3}
+items: HTTP 400 — {"error":{"code":400,"message":"Request Error"}}
+
+ads ok: 0, ads with messages: 0
