@@ -34,7 +34,7 @@ def diag(line: str) -> None:
     print(line)
     DIAG_LINES.append(line)
 STATE_FILE = os.environ.get("STATE_FILE", "state.json")
-FRESH_WINDOW = 2 * 3600            # без state берём сообщения за последние 2 часа
+FRESH_WINDOW = 24 * 3600           # без state берём сообщения за последние сутки
 API = "https://api.avito.ru"
 TG = "https://api.telegram.org"
 
@@ -137,11 +137,35 @@ def main() -> None:
 
     tok = avito_token()
     auth = {"Authorization": f"Bearer {tok}"}
+
+    # сводка по новым отчётам автозагрузки (Авито забирает фид ~раз в час)
+    try:
+        reps = http(f"{API}/autoload/v2/reports?per_page=3&page=0", headers=auth)
+        reps = reps.get("reports") or reps.get("items") or []
+        seen_rep = set(state.get("seen_reports", []))
+        for rep in sorted(reps, key=lambda r: str(r.get("started_at"))):
+            rid = rep.get("id")
+            st_ = (rep.get("status") or "").lower()
+            if rid is None or rid in seen_rep or st_.startswith(
+                    ("processing", "created", "pending", "in_progress")):
+                continue
+            seen_rep.add(rid)
+            s = rep.get("section_stats") or {}
+            top = "; ".join(f"{sec.get('title')}: {sec.get('count')}"
+                            for sec in (s.get("sections") or []) if isinstance(sec, dict))
+            tg_broadcast(sorted(subs), f"📦 Авито: автозагрузка №{rid}\n"
+                                       f"Обработано: {s.get('count', '?')}\n{top}")
+            diag(f"autoload report {rid} summarized")
+        state["seen_reports"] = sorted(seen_rep)[-20:]
+    except Exception as e:  # noqa: BLE001
+        diag(f"autoload reports check failed: {type(e).__name__}")
+    # ВСЕ свежие чаты, не только непрочитанные: если Таиров открыл чат в
+    # приложении раньше бота, флаг unread снимается и лид терялся бы.
     chats = http(
-        f"{API}/messenger/v2/accounts/{AVITO_USER_ID}/chats?unread_only=true&limit=50",
+        f"{API}/messenger/v2/accounts/{AVITO_USER_ID}/chats?limit=50",
         headers=auth,
     ).get("chats", [])
-    print(f"unread avito chats: {len(chats)}")
+    print(f"avito chats fetched: {len(chats)}")
 
     cutoff_default = int(time.time()) - FRESH_WINDOW
     sent = 0
@@ -186,8 +210,10 @@ def main() -> None:
         json.dump(state, f)
     diag(f"unread avito chats: {len(chats)}; leads sent: {sent}")
     try:
+        # метка с точностью до часа: diag-коммит не чаще раза в час (heartbeat),
+        # плюс немедленно при любом событии (новый подписчик, отчёт, ошибка)
         with open("avito-bot/diag.log", "w", encoding="utf-8") as f:
-            f.write(time.strftime("%Y-%m-%d %H:%M:%SZ", time.gmtime()) + "\n"
+            f.write(time.strftime("%Y-%m-%d %H:00Z", time.gmtime()) + "\n"
                     + "\n".join(DIAG_LINES) + "\n")
     except OSError:
         pass
