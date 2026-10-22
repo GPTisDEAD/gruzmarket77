@@ -40,7 +40,11 @@ jobs:
           AVITO_CLIENT_SECRET: ${{ secrets.AVITO_CLIENT_SECRET }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_IDS: ${{ secrets.TG_CHAT_IDS }}
-        run: python3 avito-bot/poll.py
+        run: |
+          set +e
+          python3 avito-bot/poll.py > avito-bot/last-run.log 2>&1
+          echo "exit=$?" >> avito-bot/last-run.log
+          cat avito-bot/last-run.log
 
       - name: Save state
         if: always()
@@ -54,7 +58,7 @@ jobs:
         run: |
           git config user.name "gm77-bot"
           git config user.email "bot@gruzmarket77.ru"
-          git add avito-bot/diag.log || true
+          git add avito-bot/diag.log avito-bot/last-run.log || true
           git diff --cached --quiet || {
             git commit -m "bot diag [skip ci]"
             git fetch origin main
