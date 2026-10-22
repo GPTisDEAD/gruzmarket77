@@ -208,7 +208,7 @@ def main() -> None:
         state["chats"] = dict(sorted(chats_state.items(), key=lambda kv: kv[1])[-200:])
     with open(STATE_FILE, "w", encoding="utf-8") as f:
         json.dump(state, f)
-    diag(f"unread avito chats: {len(chats)}; leads sent: {sent}")
+    diag(f"avito chats checked: {len(chats)}; leads sent: {sent}")
     try:
         # метка с точностью до часа: diag-коммит не чаще раза в час (heartbeat),
         # плюс немедленно при любом событии (новый подписчик, отчёт, ошибка)

@@ -58,7 +58,7 @@ jobs:
         run: |
           git config user.name "gm77-bot"
           git config user.email "bot@gruzmarket77.ru"
-          git add avito-bot/diag.log avito-bot/last-run.log || true
+          git add -f avito-bot/diag.log avito-bot/last-run.log || true
           git diff --cached --quiet || {
             git commit -m "bot diag [skip ci]"
             git fetch origin main
