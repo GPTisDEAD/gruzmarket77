@@ -1,52 +1,8 @@
 subscribers: 2
 who 1257818936: username=ZZZ6… name=.…(1)
 who 249979054: username=Econ… name=Ec…(10)
-autoload report 621122658 summarized
-autoload report 621143657 summarized
+autoload report 621233205 summarized
+autoload report 621257660 summarized
 avito chats fetched: 4
-Traceback (most recent call last):
-  File "/home/runner/work/gruzmarket77/gruzmarket77/avito-bot/poll.py", line 224, in <module>
-    main()
-  File "/home/runner/work/gruzmarket77/gruzmarket77/avito-bot/poll.py", line 183, in main
-    msgs = http(
-           ^^^^^
-  File "/home/runner/work/gruzmarket77/gruzmarket77/avito-bot/poll.py", line 56, in http
-    with urllib.request.urlopen(req, timeout=30) as r:
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
-    return opener.open(url, data, timeout)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/urllib/request.py", line 515, in open
-    response = self._open(req, data)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/urllib/request.py", line 532, in _open
-    result = self._call_chain(self.handle_open, protocol, protocol +
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
-    result = func(*args)
-             ^^^^^^^^^^^
-  File "/usr/lib/python3.12/urllib/request.py", line 1392, in https_open
-    return self.do_open(http.client.HTTPSConnection, req,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/urllib/request.py", line 1348, in do_open
-    r = h.getresponse()
-        ^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/http/client.py", line 1457, in getresponse
-    response.begin()
-  File "/usr/lib/python3.12/http/client.py", line 336, in begin
-    version, status, reason = self._read_status()
-                              ^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/http/client.py", line 297, in _read_status
-    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/socket.py", line 707, in readinto
-    return self._sock.recv_into(b)
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/ssl.py", line 1252, in recv_into
-    return self.read(nbytes, buffer)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/ssl.py", line 1104, in read
-    return self._sslobj.read(len, buffer)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TimeoutError: The read operation timed out
-exit=1
+avito chats checked: 4; leads sent: 0
+exit=0
