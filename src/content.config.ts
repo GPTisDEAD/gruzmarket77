@@ -50,4 +50,24 @@ const blog = defineCollection({
   })
 });
 
-export const collections = { services, cases, audiences, blog };
+const cities = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/cities' }),
+  schema: z.object({
+    name: z.string(),            // Именительный: "Химки"
+    name_v: z.string(),          // Предложный с "в": "в Химках"
+    name_iz: z.string(),         // Родительный с "из": "из Химок"
+    slug: z.string(),
+    population: z.number(),      // Население (для весов и статей)
+    distance_mkad: z.number(),   // км от МКАД до центра города
+    transfer_price: z.number(),  // ₽ доплата за выезд (0 если входит в тариф)
+    transfer_text: z.string(),   // "без доплаты" / "+500 ₽ к тарифу"
+    metro_near: z.string(),      // ближайшие станции метро / МЦД / МЦК
+    districts: z.array(z.string()).default([]), // Районы города
+    response_time: z.string(),   // "в течение часа после заявки"
+    popular_services: z.array(z.string()).default([]), // slug'и услуг
+    case_sample: z.string().optional(), // Пример выполненной работы
+    order: z.number().default(100) // Порядок в списке (меньше — выше)
+  })
+});
+
+export const collections = { services, cases, audiences, blog, cities };
