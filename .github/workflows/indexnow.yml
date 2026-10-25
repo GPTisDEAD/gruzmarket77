@@ -1,0 +1,85 @@
+# IndexNow: пушит URL в Bing + Yandex при коммитах изменивших публичные страницы.
+# Эффект: Bing (= ChatGPT, Copilot) и Yandex видят новые/обновлённые страницы за часы, не недели.
+# Ключ: 4fc9df2bcd7eca55ae3ca575c15df473, доступен по https://gruzmarket77.ru/4fc9df2bcd7eca55ae3ca575c15df473.txt
+name: indexnow-push
+on:
+  workflow_dispatch:   # ручной запуск: пушит ВСЕ URL из sitemap
+    inputs:
+      full:
+        description: 'Full push (all sitemap URLs)'
+        required: false
+        default: 'true'
+  push:
+    branches: [main]
+    paths:
+      - 'src/pages/**'
+      - 'src/content/**'
+      - 'public/**'
+      - '.github/workflows/indexnow.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Collect URLs from sitemap and ping IndexNow
+        run: |
+          set -e
+          # Собираем все URL из sitemap-0.xml сайта (авто-обновлён GitHub Pages)
+          curl -sS https://gruzmarket77.ru/sitemap-0.xml > /tmp/sitemap.xml || true
+          if [ ! -s /tmp/sitemap.xml ]; then
+            echo "sitemap пустой или недоступен — пушим только главную"
+            printf 'https://gruzmarket77.ru/\n' > /tmp/urls.txt
+          else
+            # Вытаскиваем <loc>...</loc> теги
+            grep -oE '<loc>[^<]+</loc>' /tmp/sitemap.xml | sed 's|<loc>||; s|</loc>||' > /tmp/urls.txt
+          fi
+          echo "URLs to ping: $(wc -l < /tmp/urls.txt)"
+          head -5 /tmp/urls.txt
+
+          # Собираем JSON-массив URL
+          python3 - <<'PY'
+          import json
+          with open('/tmp/urls.txt') as f:
+              urls = [line.strip() for line in f if line.strip()]
+          payload = {
+              "host": "gruzmarket77.ru",
+              "key": "4fc9df2bcd7eca55ae3ca575c15df473",
+              "keyLocation": "https://gruzmarket77.ru/4fc9df2bcd7eca55ae3ca575c15df473.txt",
+              "urlList": urls
+          }
+          with open('/tmp/indexnow.json', 'w') as f:
+              json.dump(payload, f, ensure_ascii=False)
+          print(f"payload: {len(urls)} URLs")
+          PY
+
+          # Пингуем IndexNow — один endpoint раздаёт на всех участников (Bing, Yandex, Seznam)
+          echo
+          echo "===== POST → api.indexnow.org ====="
+          curl -sS -X POST "https://api.indexnow.org/IndexNow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data-binary @/tmp/indexnow.json \
+            -w '\nhttp=%{http_code} time=%{time_total}s\n'
+
+          echo
+          echo "===== POST → www.bing.com/indexnow (резерв) ====="
+          curl -sS -X POST "https://www.bing.com/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data-binary @/tmp/indexnow.json \
+            -w '\nhttp=%{http_code} time=%{time_total}s\n'
+
+          echo
+          echo "===== POST → yandex.com/indexnow (резерв) ====="
+          curl -sS -X POST "https://yandex.com/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data-binary @/tmp/indexnow.json \
+            -w '\nhttp=%{http_code} time=%{time_total}s\n'
