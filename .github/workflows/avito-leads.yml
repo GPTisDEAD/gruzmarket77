@@ -1,15 +1,9 @@
-# Бот лидов Авито → Telegram. Поллинг каждые ~5 минут.
-# Секреты (Settings → Secrets → Actions): AVITO_CLIENT_ID, AVITO_CLIENT_SECRET,
-# TG_BOT_TOKEN, TG_CHAT_IDS. Логи публичны — контент переписки в них не попадает.
+# Бот лидов Авито → Telegram. ОТКЛЮЧЁН 26.10.2026 — заменён на push-вебхук Авито
+# на Google Apps Script endpoint (мгновенная доставка вместо поллинга).
+# Оставлен только workflow_dispatch как резерв на случай отказа вебхука.
 name: avito-leads
 on:
-  schedule:
-    - cron: "*/5 * * * *"
   workflow_dispatch:
-  push:
-    paths:
-      - "avito-bot/**"
-      - ".github/workflows/avito-leads.yml"
 
 concurrency:
   group: avito-leads
