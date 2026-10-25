@@ -54,9 +54,10 @@ const { compact = false, heading = 'Оставьте заявку', sub = 'От�
 </div>
 
 <script>
-  // Отправка: в Cloudflare Worker, если он настроен (PUBLIC_LEAD_ENDPOINT),
-  // иначе — рабочий фолбэк: открываем WhatsApp с предзаполненной заявкой.
-  const ENDPOINT = import.meta.env.PUBLIC_LEAD_ENDPOINT || '';
+  // Отправка: в Google Apps Script endpoint (ГрузМаркет77 Backend v1 от 26.10.2026),
+  // пишет в Google Sheet + шлёт в Telegram. При ошибке — фолбэк на WhatsApp.
+  const ENDPOINT = import.meta.env.PUBLIC_LEAD_ENDPOINT
+    || 'https://script.google.com/macros/s/AKfycbwlKnAZnDPqRqVf7s84G88Wte8rbwDVd2zXSPDvOo91WNwa0M33PinQrHq4YDv6OmPxjw/exec';
   const WA = '79266143959';
 
   // UTM first-touch: ловим метки на входе, храним сессию, подставляем в форму.
@@ -137,8 +138,16 @@ const { compact = false, heading = 'Оставьте заявку', sub = 'От�
 
       if (ENDPOINT) {
         try {
-          const r = await fetch(ENDPOINT, { method: 'POST', body: fd });
-          if (!r.ok) throw new Error(String(r.status));
+          // URLSearchParams + urlencoded = simple request без CORS preflight.
+          // GAS endpoint редиректит 302 на googleusercontent — side-effects
+          // (запись в Sheet + Telegram) происходят до редиректа.
+          // mode: 'no-cors' — ответ opaque, не читаем, но POST долетает.
+          await fetch(ENDPOINT, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: new URLSearchParams(Array.from(fd.entries()) as [string, string][]).toString(),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+          });
           form.reset();
           ok.hidden = false;
           fireLeadGoal('worker');
