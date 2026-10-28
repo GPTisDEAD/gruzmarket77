@@ -1,52 +1,24 @@
-2026-10-28 18:23:57Z
-existing reports: [(623878215, 'processing', '2026-10-28T17:39:02Z'), (623771313, 'success_warning', '2026-10-28T13:32:23Z'), (623369220, 'success_warning', '2026-10-27T21:37:03Z')]
-force upload: OK {}
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-new report id=623891945 status=processing
-fallback last_completed: id=None status=success_warning finished_at=2026-10-28T18:12:11Z
+2026-10-28 18:41:07Z
+existing reports: [(623891945, 'processing', '2026-10-28T18:12:11Z'), (623878215, 'success_warning', '2026-10-28T17:39:02Z'), (623771313, 'success_warning', '2026-10-28T13:32:23Z')]
+force upload: HTTP 429 — {"error":{"message":"В пределах одного часа можно запустить только одну автозагрузку. Вы уже сделали это. Можно повторить через 30 минут."}}
+
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+new report id=623902604 status=processing
+fallback last_completed: id=None status=success_warning finished_at=2026-10-28T18:37:03Z
 report id=None summary: {"title": "Обработано объявлений", "slug": "sections_stats", "sections": [{"title": "Опубликовано с проблемами", "slug": "publish_with_problems", "sections": [{"title": "Другие ошибки", "slug": "problem_other", "count": 3}, {"title": "Критические ошибки описания", "slug": "problem_params_critical", "count": 1}], "count": 4}, {"title": "Успешно опубликовано", "slug": "successful", "sections": [{"title": "Без изменений", "slug": "success_skipped", "count": 33}], "count": 33}], "count": 37}
 у отчёта нет id — постатейные ошибки пропущены
 items: HTTP 400 — {"error":{"code":400,"message":"Request Error"}}
