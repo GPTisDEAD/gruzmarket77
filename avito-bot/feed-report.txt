@@ -1,53 +1,53 @@
-2026-10-26 21:33:03Z
-existing reports: [(622409658, 'success_warning', '2026-10-26T07:09:29Z'), (622396891, 'success_warning', '2026-10-26T06:37:02Z'), (622372033, 'success_warning', '2026-10-26T05:37:04Z')]
+2026-10-28 13:44:01Z
+existing reports: [(623369220, 'success_warning', '2026-10-27T21:37:03Z'), (622770411, 'success_warning', '2026-10-26T21:37:03Z'), (622764134, 'success_warning', '2026-10-26T21:21:21Z')]
 force upload: OK {}
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-new report id=622764134 status=processing
-fallback last_completed: id=None status=success_warning finished_at=2026-10-26T21:21:21Z
-report id=None summary: {"title": "Обработано объявлений", "slug": "sections_stats", "sections": [{"title": "Опубликовано с проблемами", "slug": "publish_with_problems", "sections": [{"title": "Другие ошибки", "slug": "problem_other", "count": 3}, {"title": "Критические ошибки описания", "slug": "problem_params_critical", "count": 1}], "count": 4}, {"title": "Успешно опубликовано", "slug": "successful", "sections": [{"title": "Без изменений", "slug": "success_skipped", "count": 31}, {"title": "Изменено", "slug": "success_updated", "count": 1}], "count": 32}], "count": 36}
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+new report id=623771313 status=processing
+fallback last_completed: id=None status=success_warning finished_at=2026-10-28T13:32:23Z
+report id=None summary: {"title": "Обработано объявлений", "slug": "sections_stats", "sections": [{"title": "Опубликовано с проблемами", "slug": "publish_with_problems", "sections": [{"title": "Другие ошибки", "slug": "problem_other", "count": 3}, {"title": "Критические ошибки описания", "slug": "problem_params_critical", "count": 1}], "count": 4}, {"title": "Успешно опубликовано", "slug": "successful", "sections": [{"title": "Без изменений", "slug": "success_skipped", "count": 33}], "count": 33}], "count": 37}
 у отчёта нет id — постатейные ошибки пропущены
 items: HTTP 400 — {"error":{"code":400,"message":"Request Error"}}
 
