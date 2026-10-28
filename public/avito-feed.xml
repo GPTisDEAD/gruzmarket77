@@ -187,8 +187,8 @@
     <Category>Предложение услуг</Category>
     <ServiceType>Сад, благоустройство</ServiceType>
     <ServiceSubtype>Озеленение, уход за садом и огородом</ServiceSubtype>
-    <WorkExperience>10 лет и больше</WorkExperience>
-    <Guarantee>Да</Guarantee>
+    <Specialty>Уход за участком, растениями, посадка деревьев и услуги садовника</Specialty><TeamSize><Option>2-4 человека</Option><Option>5-20 человек</Option></TeamSize><MaterialPurchase>Возможна</MaterialPurchase><WorkWithContract>Да</WorkWithContract><WorkExperience>10 лет и больше</WorkExperience>
+    <Guarantee>Есть</Guarantee>
     <Title>Ландшафт территорий БЦ, ТРЦ, УК и ТСЖ</Title>
     <Description><![CDATA[Благоустройство и уход за территорией коммерческих и жилых объектов: БЦ, ТРЦ, автосалоны, промзоны, территории УК и ТСЖ. От посадки газонов и клумб до регулярного ухода по сезонам.
 
@@ -248,7 +248,7 @@
     <WorkExperience>10 лет и больше</WorkExperience>
     <CleaningProducts>Есть свои</CleaningProducts>
     <WorkWithLegalEntities>Да</WorkWithLegalEntities>
-    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <Specialty><Option>Мойка коммерческих и сложных объектов</Option></Specialty>
     <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
     <MinimumOrderAmount>3000</MinimumOrderAmount>
     <Title>Мойка окон и фасадов: БЦ, ТЦ, склады</Title>
@@ -1957,7 +1957,7 @@
     <WorkExperience>10 лет и больше</WorkExperience>
     <CleaningProducts>Есть свои</CleaningProducts>
     <WorkWithLegalEntities>Да</WorkWithLegalEntities>
-    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <Specialty><Option>Промышленный альпинизм</Option></Specialty>
     <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
     <MinimumOrderAmount>3000</MinimumOrderAmount>
     <Title>Мойка окон и фасадов в ЦАО, промальп</Title>
@@ -2011,7 +2011,7 @@
     <WorkExperience>10 лет и больше</WorkExperience>
     <CleaningProducts>Есть свои</CleaningProducts>
     <WorkWithLegalEntities>Да</WorkWithLegalEntities>
-    <Specialty><Option>Уборка помещений</Option></Specialty>
+    <Specialty><Option>Мойка коммерческих и сложных объектов</Option></Specialty>
     <RoomType><Option>Жилое</Option><Option>Нежилое</Option></RoomType>
     <MinimumOrderAmount>3000</MinimumOrderAmount>
     <Title>Мойка витрин и окон для бизнеса — ЗАО</Title>
