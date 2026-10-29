@@ -206,6 +206,23 @@ def main() -> None:
 
     if len(chats_state) > 200:               # подчистка: последние 200 чатов
         state["chats"] = dict(sorted(chats_state.items(), key=lambda kv: kv[1])[-200:])
+
+    # ── утренний пульс: раз в день после 09:00 МСК «бот жив»
+    msk = time.gmtime(time.time() + 3 * 3600)
+    today = time.strftime("%Y-%m-%d", msk)
+    dl = state.get("day_leads", {})
+    if dl.get("date") != today:                # новые сутки: вчерашний счётчик в архив
+        state["yesterday_leads"] = dl.get("n", 0)
+        dl = {"date": today, "n": 0}
+    dl["n"] = dl.get("n", 0) + sent
+    state["day_leads"] = dl
+    if msk.tm_hour >= 9 and state.get("heartbeat_date") != today:
+        tg_broadcast(subs, "🫀 Бот лидов жив. Вчера лидов: "
+                     f"{state.get('yesterday_leads', '—')}, сегодня уже: {dl['n']}. "
+                     "Поллинг каждые 5 мин.")
+        state["heartbeat_date"] = today
+        diag("heartbeat sent")
+
     with open(STATE_FILE, "w", encoding="utf-8") as f:
         json.dump(state, f)
     diag(f"avito chats checked: {len(chats)}; leads sent: {sent}")
