@@ -44,3 +44,16 @@ try:
     print(f"tg getMe HTTP {st}: {body[:200]}")
 except Exception as e:
     print(f"tg getMe FAIL: {e}")
+
+# имитация вебхука Авито v3 (JSON) — так ли GAS его переваривает
+try:
+    fake={"id":"diag-test","version":"v3.0.0","timestamp":1761730000,
+          "payload":{"type":"message","value":{
+              "id":"diag-msg","chat_id":"diag-chat","user_id":449315472,
+              "author_id":111,"created":1761730000,"type":"text",
+              "chat_type":"u2i","content":{"text":"ТЕСТ вебхука Авито (не лид) — диагностика"},
+              "item_id":8369575039}}}
+    st, body = req(GAS, fake)
+    print(f"GAS avito-json HTTP {st}: {body[:300]}")
+except Exception as e:
+    print(f"GAS avito-json FAIL: {e}")
