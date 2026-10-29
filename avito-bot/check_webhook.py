@@ -33,6 +33,18 @@ try:
 except Exception as e:
     print(f"subscriptions FAIL: {e}")
 
+# переподписка: снять и заново подписать вебхук (Авито мог заглушить доставку после фейлов)
+try:
+    st, body = req(f"{API}/messenger/v1/webhook/unsubscribe", {"url": GAS}, headers={"Authorization":f"Bearer {token}"})
+    print(f"unsubscribe HTTP {st}: {body[:200]}")
+except Exception as e:
+    print(f"unsubscribe: {e}")
+try:
+    st, body = req(f"{API}/messenger/v3/webhook", {"url": GAS}, headers={"Authorization":f"Bearer {token}"})
+    print(f"resubscribe v3 HTTP {st}: {body[:200]}")
+except Exception as e:
+    print(f"resubscribe FAIL: {e}")
+
 try:
     st, body = req(GAS, {"source":"diag","text":"webhook-diag ping"}, form=True)
     print(f"GAS HTTP {st}: {body[:200]}")
