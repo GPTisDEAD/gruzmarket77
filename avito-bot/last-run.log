@@ -1,9 +1,8 @@
 subscribers: 2
 who 1257818936: username=ZZZ6… name=.…(1)
 who 249979054: username=Econ… name=Ec…(10)
-avito chats fetched: 7
-heartbeat sent
-avito chats checked: 7; leads sent: 0
+avito chats fetched: 8
+avito chats checked: 8; leads sent: 2
 === WEBHOOK DIAG ===
 avito token: OK
 subscriptions HTTP 200: {"subscriptions":[{"url":"https://script.google.com/macros/s/AKfycbwlKnAZnDPqRqVf7s84G88Wte8rbwDVd2zXSPDvOo91WNwa0M33PinQrHq4YDv6OmPxjw/exec","version":"3"}]}
