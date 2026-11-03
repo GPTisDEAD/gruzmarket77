@@ -1,9 +1,8 @@
 subscribers: 2
 who 1257818936: username=ZZZ6… name=.…(1)
 who 249979054: username=Econ… name=Ec…(10)
-autoload report 626954276 summarized
-autoload report 627025185 summarized
 avito chats fetched: 8
+heartbeat sent
 avito chats checked: 8; leads sent: 0
 === WEBHOOK DIAG ===
 avito token: OK
