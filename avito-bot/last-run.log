@@ -2,7 +2,7 @@ subscribers: 2
 who 1257818936: username=ZZZ6… name=.…(1)
 who 249979054: username=Econ… name=Ec…(10)
 autoload report 638038330 summarized
-avito chats fetched: 18
+avito chats fetched: 19
 HTTP 402 from api.avito.ru
 === WEBHOOK DIAG ===
 avito token: OK
